@@ -7,12 +7,21 @@ gem 'rails', '3.2.14'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'ruby-debug19'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'rspec-rails'
 end
 
 group :production do
   gem 'pg'
 end
 
+group :test do
+  gem 'cucumber-rails'
+  gem 'cucumber-rails-training-wheels'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
