@@ -7,9 +7,9 @@ So that correct information is available on the website for my restaurant.
 Background: My restaurant has already been added.
 
   Given the following restaurants exist:
-  | Name                   | ZIP   | Address             | Open Time | Close Time | Menu Items              | Owner
-  | Pasta Benne            | 94704 | 1 abc St, Berkeley  |   10AM    |  8PM       | pizza,pasta             | 92928
-  | Thai Basil             | 94704 | 2 abc St, Berkeley  |   12PM    |  10PM      | thai combo,fried rice   | 51871
+  | Name                   | ZIP   | Address             | Open Time | Close Time | Menu Items              | Owner |
+  | Pasta Benne            | 94704 | 1 abc St, Berkeley  |   10AM    |  8PM       | pizza,pasta             | 92928 |
+  | Thai Basil             | 94704 | 2 abc St, Berkeley  |   12PM    |  10PM      | thai combo,fried rice   | 51871 |
 
   Given I am on the edit restaurant page.
   
