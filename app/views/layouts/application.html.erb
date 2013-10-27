@@ -17,7 +17,7 @@
       /* Custom container */
       .container-narrow {
         margin: 0 auto;
-        max-width: 700px;
+        max-width: 90%;
       }
       .container-narrow > hr {
         margin: 30px 0;
@@ -36,6 +36,15 @@
         font-size: 21px;
         padding: 14px 24px;
       }
+      
+      .footer {
+        position: relative;
+        margin-top: -150px;
+        height: 150px;
+        clear: both;
+        padding-top:20px;
+        margin-left:50%;
+      }
 
       /* Supporting marketing content */
       .marketing {
@@ -51,22 +60,22 @@
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Browse Users", users_path %></li>
+          <li><%= link_to "All Users", users_path %></li>
+          <li><%= link_to "Browse Restaurants", restaurants_path %></li>
           <li><a href="#">Login</a></li>
         </ul>
         <h3 class="muted">Menuize</h3>
       </div>
     <div class="row">
-      <div class="span9"><%= yield %></div>
-      <div class="span3">
+      <span class="span9" style="max-width:70%"><%= yield %></span>
+      <span class="span3" style="max-width:30%">
         <h2>About Us</h2>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
+      </span>
     </div>
-    <div class="footer">
+    <footer class="footer">
       <p>&copy; Menuize 2013</p>
-    </div>
+    </footer>
   </div>
   
 </body>

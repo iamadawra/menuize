@@ -1,0 +1,38 @@
+<%= form_for @restaurant, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :status, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :status, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :owned_by, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :owned_by, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :restaurant_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :restaurant_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :owner_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :owner_name, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                restaurants_path, :class => 'btn' %>
+  </div>
+<% end %>

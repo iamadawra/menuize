@@ -1,4 +1,7 @@
 Menuize::Application.routes.draw do
+  resources :restaurants
+
+
   resources :users
   root :to=>"users#index"
 
