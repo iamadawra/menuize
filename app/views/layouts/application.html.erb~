@@ -51,7 +51,7 @@
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li><%= link_to "Home", root_path %></li>
+          <li class="active"><%= link_to "Home" %></li>
           <li><%= link_to "Browse Users", users_path %></li>
           <li><a href="#">Login</a></li>
         </ul>
