@@ -22,10 +22,10 @@ module NavigationHelpers
     #     user_profile_path(User.find_by_login($1))
 
     when /^the add restaurant page$/ then '/restaurants/new'
-    when /^the show page for "[^"]*"$/ then
-      restaurant_path(Restaurants.find_by_name($1))
-    when /^the edit page for "[^"]*"$/ then
-      edit_restaurant_path(Restaurants.find_by_name($1))
+    when /^the show page for "(.*)*"$/ then
+      restaurant_path(Restaurant.find_by_name($1))
+    when /^the edit page for "(.*)"$/ then
+      edit_restaurant_path(Restaurant.find_by_name($1).id)
 
     else
       begin
