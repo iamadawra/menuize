@@ -36,6 +36,19 @@ describe UsersController do
     end
   end
 
+  describe "GET update" do
+    it "assigns the requested user as @user" do
+      user = User.create! valid_attributes
+      get :update, {:id => user.to_param}, valid_session
+      assigns(:user).should eq(user)
+    end
+  end
 
-
+  describe "GET destroy" do
+    it "assigns the requested user as @user" do
+      user = User.create! valid_attributes
+      get :destroy, {:id => user.to_param}, valid_session
+      assigns(:user).should eq(user)
+    end
+  end
 end
