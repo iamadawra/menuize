@@ -7,9 +7,9 @@ So that I can share my knowledge and get a sense of achievement
 Background: The restaurant I am editing has already been added.
 
 
-Given the following restaurant exists
+Given the following restaurants exists
 
-| Name    | ZIP   | Address    | Open Time | Close Time | Menu Items | 
+| name    | zip   | address    | open_time | close_time | menu | 
 | Top Dog | 94704 | 1 abc St, Berkeley | 10AM | 8PM | hot dogs       |
     
 
@@ -19,7 +19,7 @@ Scenario: Edit Top Dog's hours and menu
 
 When I fill in the following
 
-| Name    | ZIP   | Address    | Open Time | Close Time | Menu Items |
+| name    | zip   | address    | open_time | close_time | menu | 
 | Top Dog | 94704 | 1 abc St, Berkeley | 9AM | 11PM | hot dogs, soda |
 
 And I press "Submit"

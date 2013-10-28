@@ -44,10 +44,6 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
-
-    respond_to do |format|
-      format.html { redirect_to restaurants_url }
-      format.json { head :no_content }
-    end
+    super
   end
 end
