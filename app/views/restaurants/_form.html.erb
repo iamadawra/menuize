@@ -11,6 +11,49 @@
       <%= f.select :status, [['Collaborative','Collaborative'], ['Exclusive', 'Exclusive']], :multiple=>'multiple' %>
     </div>
   </div>
+  <div class="control-group">
+    <%= f.label :open_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :open_time, [['8 am', '8'], ['9 am', '9'], ['10 am', '10'], ['11 am', '11'], ['Noon', '12'], ['1 pm', '13'], ['2pm', '14'], ['3pm', '15'], ['4 pm', '16'], ['5 pm', '17'], ['6 pm', '18'], ['7 pm', '19'], ['8 pm', '20'], ['9 pm', '21'], ['10 pm', '22'], ['11 pm', '23'], ['12 am', '24'], ['1 am', '1'], ['2 am', '2'], ['3 am', '3'], ['4 am', '4'], ['5 am', '5'], ['6 am', '6'], ['7 am', '7']] %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :close_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :close_time, [['8 am', '8'], ['9 am', '9'], ['10 am', '10'], ['11 am', '11'], ['Noon', '12'], ['1 pm', '13'], ['2pm', '14'], ['3pm', '15'], ['4 pm', '16'], ['5 pm', '17'], ['6 pm', '18'], ['7 pm', '19'], ['8 pm', '20'], ['9 pm', '21'], ['10 pm', '22'], ['11 pm', '23'], ['12 am', '24'], ['1 am', '1'], ['2 am', '2'], ['3 am', '3'], ['4 am', '4'], ['5 am', '5'], ['6 am', '6'], ['7 am', '7']] %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :address, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :address, :class => 'text_field', :style=>"height:30px; width:250px" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :city, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :city, :class => 'text_field', :style=>"height:30px; width:250px" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :zip, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :zip, :class => 'text_field', :style=>"height:30px; width:250px" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_field', :style=>"height:150px; width:350px" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :menu, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :menu, :class => 'text_field', :style=>"height:250px; width:350px" %>
+    </div>
+  </div>
+
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

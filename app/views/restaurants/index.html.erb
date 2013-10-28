@@ -7,8 +7,8 @@
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:owner_name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:open_time) %></th>
+      <th><%= model_class.human_attribute_name(:close_time) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -17,8 +17,8 @@
       <tr>
         <td><%= link_to restaurant.name, restaurant_path(restaurant) %></td>
         <td><%= restaurant.status %></td>
-        <td><%= restaurant.owner_name %></td>
-        <td><%=l restaurant.created_at %></td>
+        <td><%= (restaurant.open_time).to_s + ":00 hrs" %></td>
+        <td><%= (restaurant.close_time).to_s + ":00 hrs" %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_restaurant_path(restaurant), :class => 'btn btn-mini' %>

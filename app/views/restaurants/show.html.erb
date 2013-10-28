@@ -8,8 +8,14 @@
   <dd><%= @restaurant.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
   <dd><%= @restaurant.status %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:owned_by) %>:</strong></dt>
-  <dd><%= @restaurant.owned_by %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @restaurant.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:open_time) %>:</strong></dt>
+  <dd><%= (@restaurant.open_time).to_s + ":00 hrs" %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:close_time) %>:</strong></dt>
+  <dd><%= (@restaurant.close_time).to_s + ":00 hrs" %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:menu) %>:</strong></dt>
+  <dd><%= @restaurant.menu %></dd>
 </dl>
 
 <div class="form-actions">

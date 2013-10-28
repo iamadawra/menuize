@@ -15,8 +15,9 @@
 #  city          :string(255)
 #  zip           :integer
 #  category      :string(255)
-#  open_time     :datetime
-#  close_time    :datetime
+#  menu          :string(255)
+#  open_time     :integer
+#  close_time    :integer
 #
 
 require 'spec_helper'

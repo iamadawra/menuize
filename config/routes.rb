@@ -3,7 +3,7 @@ Menuize::Application.routes.draw do
 
 
   resources :users
-  root :to=>"users#index"
+  root :to=>"restaurants#index"
 
 
   # The priority is based upon order of creation:

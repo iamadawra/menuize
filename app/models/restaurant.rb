@@ -15,11 +15,12 @@
 #  city          :string(255)
 #  zip           :integer
 #  category      :string(255)
-#  open_time     :datetime
-#  close_time    :datetime
+#  menu          :string(255)
+#  open_time     :integer
+#  close_time    :integer
 #
 
 class Restaurant < ActiveRecord::Base
-  attr_accessible :name, :status
+  attr_accessible :name, :status, :open_time, :close_time, :address, :city, :zip, :description, :menu
   # Non accessible attributes: :owned_by, :owner_name, :restaurant_id
 end
