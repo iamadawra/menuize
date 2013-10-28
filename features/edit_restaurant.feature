@@ -16,7 +16,7 @@ Given I am on the edit page for "Pasta Benne"
 When I select "10 pm" from "restaurant[close_time]"
 And I select "Collaborative" from "restaurant[status]"
 And I press "Update Restaurant"
-Then I should see "Restaurant Owner has exclusive access over the editing of this page."
+Then I should reach the show page for "Pasta Benne"
 
 Scenario: Edit a restaurant "Thai Basil" as an owner
 Given I am on the edit page for "Thai Basil"
