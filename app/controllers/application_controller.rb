@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   def destroy
     instance_variable = instance_variable_get("@#{controller_name.singularize}")
     respond_to do |format|
-      format.html { redirect_to "#{controller_name}_url" }
+      format.html { redirect_to "/#{controller_name}" }
       format.json { head :no_content }
     end
   end
