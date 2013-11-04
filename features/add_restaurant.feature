@@ -6,30 +6,25 @@ So that I can share information about restaurants that I like or do not like and
 
 Background: I am on the "Add a Restaurant Page".
 
-Given I am on the add restaurant page.
+Given I am on the add restaurant page
 
 Scenario: Add a restaurant "Pasta Benne" as a non-owner
 When I fill in the following:
-     | Name            | Pasta Benne		  |
-     | ZIP	       | 94704			  |
-     | Address	       | 123 abc street, Berkeley |
-     | Open Time       | 10 am        	 	  |
-     | Close Time      | 8 pm			  |
-     | Menu Items      | pizza, pasta 		  |
-And I select "Non-Owner" from "Owns?"
-And I press "Add"
-Then I should see "Restaurant Added as Non-Owner"
+     | restaurant[name]           | Pasta Benne		     |
+     | restaurant[zip]	          | 94704		     |
+     | restaurant[address]	  | 123 abc street, Berkeley |
+     | restaurant[menu]           | pizza, pasta 	     |
+And I press "Create Restaurant"
+Then I should reach the show page for "Pasta Benne"
 And the restaurant "Pasta Benne" should be editable
 
 Scenario: Add a restaurant "Thai Basil" as an owner
 When I fill in the following:
-     | Name	       | Thai Basil		  |
-     | ZIP	       | 94704			  |
-     | Address	       | 567 Durant, Berkeley	  |
-     | Open Time       | 12 pm	     		  |
-     | Close Time      | 10 pm			  |
-     | Menu Items      | Thai combo, Fried rice   |
-And I select "Owner" from "Owns?"
-And I press "Add"
-Then I should see "Restaurant Added as Owner."
+     | restaurant[name]	          | Thai Basil		     |
+     | restaurant[zip]	          | 94704		     |
+     | restaurant[address]	  | 567 Durant, Berkeley     |
+     | restaurant[menu]           | Thai combo, Fried rice   |
+And I select "Exclusive" from "restaurant[status]"
+And I press "Create Restaurant"
+Then I should reach the show page for "Thai Basil"
 And the restaurant "Thai Basil" should not be editable

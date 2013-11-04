@@ -4,14 +4,10 @@ Given (/^the following restaurant exists$/) do |restaurant_table|
   end
 end
 
-When (/^I fill in the following$/) do |table|
-  r = Restaurant.where('name=?', table[0][0])
-  r[:Open_Time] = table[0][3]
-  r[:Close_Time] = table[0][4]
-  r[:MenuItems] = table[0][5]
-end
-
-And (/^(.*) should have Close Time equals (.*)$/) do |name, time|
-  r = Restaurant.where('name=?', name)
-  r[:Close_Time].should eq(time)
+And (/^"(.*)" should have Close Time equals "(.*)"$/) do |name, time|
+  r = Restaurant.find_by_name(name)
+  timeArr = time.split(" ")
+  num = timeArr[0].to_i
+  num = num + 12 if timeArr[1] == "pm"
+  r.close_time.should eq(num)
 end
