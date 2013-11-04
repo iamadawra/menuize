@@ -1,4 +1,4 @@
-Feature: Admins
+Feature: Admins can send email confirmations to Business Owners that request ownership of a restaurant page.
 
 As a Menuize Admin
 I want to send out an email to users requesting ownership of a restaurant
