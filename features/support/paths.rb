@@ -26,6 +26,8 @@ module NavigationHelpers
       restaurant_path(Restaurant.find_by_name($1))
     when /^the edit page for "(.*)"$/ then
       edit_restaurant_path(Restaurant.find_by_name($1).id)
+    when /^the login page$/ then
+      '/login'
 
     else
       begin

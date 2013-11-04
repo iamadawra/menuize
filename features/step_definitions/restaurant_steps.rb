@@ -1,3 +1,10 @@
+Given /^the current user is "(.*?)" with password "(.*?)"/ do |user, pass|
+  visit '/login/'
+  fill_in("username", :with => user)
+  fill_in("password", :with => pass)
+  click_button("Submit")
+end
+
 Then /^the restaurant "(.*)" should be editable/ do |restaurant|
   r = Restaurant.find_by_name(restaurant)
   r.status.should eq("Collaborative")
