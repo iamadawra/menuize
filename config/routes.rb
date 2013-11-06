@@ -1,12 +1,9 @@
 Menuize::Application.routes.draw do
 
-  resources :restaurants
-  resources :sessions
-  resources :users
+  resources :restaurants, :sessions, :users
 
   get "login" => "sessions#new", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
-
   get "signup" => "users#new", :as => "signup"
 
   root :to=>"users#new"
