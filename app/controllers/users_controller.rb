@@ -29,7 +29,11 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    super
+    if @user.save
+      redirect_to root_url, :notice => "Signup was successful!"
+    else
+      render 'new'
+    end
   end
 
   # PUT /users/1
