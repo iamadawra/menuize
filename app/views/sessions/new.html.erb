@@ -9,6 +9,7 @@
     <%= label_tag :password %><br />
     <%= password_field_tag :password %>
   </p>
-  <p><%= submit_tag "Log in", :class=>"btn btn-success" %></p>
+  <span><%= submit_tag "Log in", :class=>"btn btn-success" %></span>
+  <span><%= link_to "Signup", signup_path, :class=>"btn btn-primary" %></span>
 <% end %>
 
