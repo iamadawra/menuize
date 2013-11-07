@@ -62,15 +62,15 @@
         <div id="user_nav">
           <% if current_user %>
             <ul class="nav nav-pills pull-right">
+              <li><%= link_to current_user.email %></li>
               <li><%= link_to "Browse Restaurants", restaurants_path %></li>
               <li><%= link_to "Log out", logout_path %></li>
-              <li>Logged in as <%= current_user.email %></li>
             </ul>
           <% else %>
             <ul class="nav nav-pills pull-right">
               <li><%= link_to "Browse Restaurants", restaurants_path %></li>
-              <li><%= link_to "Sign up", signup_path %></li>
               <li><%= link_to "Log In", login_path %></li>
+              <li><%= link_to "Sign up", signup_path %></li>
             </ul>
           <% end %>
         </div>
