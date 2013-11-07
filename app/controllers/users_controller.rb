@@ -32,6 +32,11 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_url, :notice => "Signup was successful!"
     else
+      if @user.errors.any?
+        for message in @user.errors.full_messages
+          flash[:error] = message
+        end
+      end
       render 'new'
     end
   end

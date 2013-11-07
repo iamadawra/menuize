@@ -78,8 +78,8 @@
       </div>
     <div class="row">
       <span class="span9" style="max-width:70%">
-        <% flash.each do |name, msg| %>
-          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}", :class=>["alert alert-#{name}"] %>
         <% end %>
       </span>
       <span class="span9" style="max-width:70%">
