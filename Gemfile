@@ -38,12 +38,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '< 3.0.0'
 gem 'bootstrap-sass'
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
 gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 gem "bcrypt-ruby", :require => "bcrypt"
+gem 'activeadmin'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
