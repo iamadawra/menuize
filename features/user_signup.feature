@@ -6,37 +6,28 @@ So that I can learn about restaurants and their menus, contribute to the informa
 
 Background:
 Given that the following users exist:
-| first_name | last_name | username | email | password |
-| John | Snow | jsnow| johnsnow@gmail.com | john123 |
-| Sam | Peterson | speterson | sampeter@yahoo.com | sam123 |
+| email | password |
+| johnsnow@gmail.com | john123 |
+| sampeter@yahoo.com | sam123 |
 And I am on the signup page
 
-Scenario: Original username and email address is used.
-Given I fill in "first_name" with "George"
-And I fill in "last_name" with "Clooney"
-And I fill in "username" with "gclooney"
-And I fill in "password" with "george123"
-And I fill in "confirm_password" with "george123"
-And I fill in "email" with "george@gmail.com"
-And I press "Create Account"
-Then I should see "Account successfully created."
-
-Scenario: Username has already been taken.
-Given I fill in "first_name" with "Johnny"
-And I fill in "last_name" with "Snow"
-And I fill in "username" with "jsnow"
-And I fill in "password" with "whocares"
-And I fill in "confirm_password" with "whocares"
-And I fill in "email" with "johnny@gmail.com"
-And I press "Create Account"
-Then I should see "Username already taken."
+Scenario: Original email address is used.
+Given I fill in "user[email]" with "george@gmail.com"
+And I fill in "user[password]" with "george123"
+And I fill in "user[password_confirmation]" with "george123"
+And I press "Signup"
+Then I should see "Signup was successful!"
 
 Scenario: Email has already been used.
-Given I fill in "first_name" with "Johnny"
-And I fill in "last_name" with "Snow"
-And I fill in "username" with "johnnysnow"
-And I fill in "password" with "whocares"
-And I fill in "confirm_password" with "whocares"
-And I fill in "email" with "jsnow@gmail.com"
-And I press "Create Account"
-Then I should see "An account already exists with this email address."
+And I fill in "user[email]" with "johnsnow@gmail.com"
+And I fill in "user[password]" with "whocares"
+And I fill in "user[password_confirmation]" with "whocares"
+And I press "Signup"
+Then I should see "Email has already been taken"
+
+Scenario: Password and password confirmation do not match.
+Given I fill in "user[email]" with "saveen@gmail.com"
+And I fill in "user[password]" with "saveen123"
+And I fill in "user[password_confirmation]" with "xyz"
+And I press "Signup"
+Then I should see "Password doesn't match confirmation"
