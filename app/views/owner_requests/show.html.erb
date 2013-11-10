@@ -1,30 +1,29 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = OwnerRequest -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <b>User:</b>
-  <%= @owner_request.user_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @owner_request.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:restaurant_id) %>:</strong></dt>
+  <dd><%= @owner_request.restaurant_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:restaurant_name) %>:</strong></dt>
+  <dd><%= @owner_request.restaurant_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:granted) %>:</strong></dt>
+  <dd><%= @owner_request.granted %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:granted_by) %>:</strong></dt>
+  <dd><%= @owner_request.granted_by %></dd>
+</dl>
 
-<p>
-  <b>Restaurant:</b>
-  <%= @owner_request.restaurant_id %>
-</p>
-
-<p>
-  <b>Restaurant name:</b>
-  <%= @owner_request.restaurant_name %>
-</p>
-
-<p>
-  <b>Granted:</b>
-  <%= @owner_request.granted %>
-</p>
-
-<p>
-  <b>Granted by:</b>
-  <%= @owner_request.granted_by %>
-</p>
-
-
-<%= link_to 'Edit', edit_owner_request_path(@owner_request) %> |
-<%= link_to 'Back', owner_requests_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              owner_requests_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_owner_request_path(@owner_request), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              owner_request_path(@owner_request),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
