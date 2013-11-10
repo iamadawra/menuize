@@ -13,7 +13,6 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'simplecov'
-  gem 'cancan'
 end
 
 group :production do
@@ -47,6 +46,7 @@ gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'activeadmin'
 gem 'mail'
+gem 'cancan'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
