@@ -49,9 +49,14 @@ class ApplicationController < ActionController::Base
       format.json { head :no_content }
     end
   end
-  
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:notice] = "You are not authorized to access this page"
+    redirect_to restaurants_path
+  end
+
   private
-  
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
