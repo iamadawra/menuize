@@ -6,7 +6,12 @@ So that I can share information about restaurants that I like or do not like and
 
 Background: I am on the "Add a Restaurant Page".
 
-Given I am on the add restaurant page
+Given the following users exist:
+| email | password | id |
+| johnsnow@gmail.com | john123 | 1 |
+
+Given the current user is "johnsnow@gmail.com" with password "john123"
+And I am on the add restaurant page
 
 Scenario: Add a restaurant "Pasta Benne" as a non-owner
 When I fill in the following:
@@ -16,6 +21,7 @@ When I fill in the following:
      | restaurant[menu]           | pizza, pasta 	     |
 And I press "Create Restaurant"
 Then I should reach the show page for "Pasta Benne"
+And I should see "Entry was successfully created."
 And the restaurant "Pasta Benne" should be editable
 
 Scenario: Add a restaurant "Thai Basil" as an owner
@@ -27,7 +33,5 @@ When I fill in the following:
 And I select "Exclusive" from "restaurant[status]"
 And I press "Create Restaurant"
 Then I should reach the show page for "Thai Basil"
-And I should see "Waiting for admin confirmation"
-And the restaurant "Thai Basil" should be editable
-When the admin confirms the request for "Thai Basil"
-Then the restaurant "Thai Basil" should not be editable
+And I should see "Entry was successfully created."
+And the restaurant "Thai Basil" should be awaiting approval

@@ -28,8 +28,10 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    alias_action :edit, :update, :destroy, :to => :eud
-    can :eud, Restaurant, :status => "Collaborative"
-    can :eud, Restaurant, :owned_by => user.id
+    alias_action :edit, :update, :to => :eu
+    can :eu, Restaurant, :status => "Collaborative"
+    can :eu, Restaurant, :owned_by => user.id
+    can :destroy, Restaurant, :status => "Pending Approval", :owned_by => user.id
+    can :destroy, Restaurant, :status => "Exclusive", :owned_by => user.id
   end
 end
