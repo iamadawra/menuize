@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def registration_confirmation(user)
     @user = user
-    mail(:to => "#{user.name} <#{user.email}>", :subject => "Welcome to Menuize!")
+    mail(:to => user.email, :subject => "Welcome to Menuize!")
   end
 end
 
