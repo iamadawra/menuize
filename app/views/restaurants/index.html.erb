@@ -20,16 +20,18 @@
         <td><%= (restaurant.open_time).to_s + ":00 hrs" %></td>
         <td><%= (restaurant.close_time).to_s + ":00 hrs" %></td>
         <td>
-          <% if can? :edit, restaurant %>
-            <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_restaurant_path(restaurant), :class => 'btn btn-mini' %>
-          <% end %>
-          <% if can? :destroy, restaurant %>
-            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                        restaurant_path(restaurant),
-                        :method => :delete,
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+          <% if !(current_user.nil?) %>
+            <% if can? :edit, restaurant %>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                          edit_restaurant_path(restaurant), :class => 'btn btn-mini' %>
+            <% end %>
+            <% if can? :destroy, restaurant %>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                          restaurant_path(restaurant),
+                          :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-mini btn-danger' %>
+            <% end %>
           <% end %>
         </td>
       </tr>
