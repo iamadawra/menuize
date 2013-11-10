@@ -1,4 +1,5 @@
 ActiveAdmin.register Restaurant do
+  scope :pending_approval
   scope :collaborative
   scope :exclusive
   index do
