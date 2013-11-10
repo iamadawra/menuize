@@ -5,5 +5,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(:to => "#{user.name} <#{user.email}>", :subject => "Welcome to Menuize!")
   end
+  def access_request(user, restaurant)
+    mail(:to => "Menuize Team <menuize@gmail.com>", :subject => "Approval Request for #{restaurant.name}")
 end
 

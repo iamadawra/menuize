@@ -46,6 +46,7 @@ class RestaurantsController < ApplicationController
     if (params[:restaurant][:status] == "Exclusive")
       request = { :user_id => current_user.id, :granted => 0, :restaurant_id => @restaurant.id, :restaurant_name => @restaurant.name}
       OwnerRequest.create(request)
+      params[:restaurant][:status] = "Pending Approval"
       @restaurant.mark_pending(current_user.id)
     end
     super
