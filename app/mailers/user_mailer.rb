@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  from: "no-reply@menuize.herokuapp.com"
+  default from: "no-reply@menuize.herokuapp.com"
 
   def registration_confirmation(user)
     @user = user
