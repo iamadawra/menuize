@@ -1,0 +1,31 @@
+<h1>Listing owner_requests</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Restaurant</th>
+    <th>Restaurant name</th>
+    <th>Granted</th>
+    <th>Granted by</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @owner_requests.each do |owner_request| %>
+  <tr>
+    <td><%= owner_request.user_id %></td>
+    <td><%= owner_request.restaurant_id %></td>
+    <td><%= owner_request.restaurant_name %></td>
+    <td><%= owner_request.granted %></td>
+    <td><%= owner_request.granted_by %></td>
+    <td><%= link_to 'Show', owner_request %></td>
+    <td><%= link_to 'Edit', edit_owner_request_path(owner_request) %></td>
+    <td><%= link_to 'Destroy', owner_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Owner request', new_owner_request_path %>

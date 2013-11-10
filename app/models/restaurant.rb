@@ -25,4 +25,10 @@ class Restaurant < ActiveRecord::Base
   # Non accessible attributes: :owner_name, :restaurant_id
   scope :collaborative, where(:status=>"Collaborative")
   scope :exclusive, where(:status=>"Exclusive")
+
+  def mark_pending(id)
+    self.status = "Pending Approval"
+    self.owned_by = id
+    self.save
+  end
 end

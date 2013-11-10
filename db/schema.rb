@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109220016) do
+ActiveRecord::Schema.define(:version => 20131110103918) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(:version => 20131109220016) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "owner_requests", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "restaurant_id"
+    t.string   "restaurant_name"
+    t.integer  "granted"
+    t.integer  "granted_by"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "restaurants", :force => true do |t|
     t.string   "name"

@@ -1,5 +1,8 @@
 Menuize::Application.routes.draw do
 
+  resources :owner_requests
+
+
   root :to=>"users#new"
 
   devise_for :admin_users, ActiveAdmin::Devise.config

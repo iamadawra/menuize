@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @owner_request.user_id %>
+</p>
+
+<p>
+  <b>Restaurant:</b>
+  <%= @owner_request.restaurant_id %>
+</p>
+
+<p>
+  <b>Restaurant name:</b>
+  <%= @owner_request.restaurant_name %>
+</p>
+
+<p>
+  <b>Granted:</b>
+  <%= @owner_request.granted %>
+</p>
+
+<p>
+  <b>Granted by:</b>
+  <%= @owner_request.granted_by %>
+</p>
+
+
+<%= link_to 'Edit', edit_owner_request_path(@owner_request) %> |
+<%= link_to 'Back', owner_requests_path %>
