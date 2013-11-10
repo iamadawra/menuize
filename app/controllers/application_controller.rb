@@ -50,9 +50,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:notice] = "You are not authorized to access this page"
-    redirect_to restaurants_path
+  #plugin protection
+  is_cancan=true
+  begin
+    Kernel.const_get('CanCan')
+  rescue
+    is_cancan=false
+  end
+  if is_cancan
+    rescue_from CanCan::AccessDenied do |exception|
+      flash[:error] = 'You are not authorized to update this page.'
+      redirect_to restaurants_path
+    end
   end
 
   private
