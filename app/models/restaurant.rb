@@ -21,8 +21,8 @@
 #
 
 class Restaurant < ActiveRecord::Base
-  attr_accessible :name, :status, :open_time, :close_time, :address, :city, :zip, :description, :menu
-  # Non accessible attributes: :owned_by, :owner_name, :restaurant_id
+  attr_accessible :name, :status, :open_time, :close_time, :address, :city, :zip, :description, :menu, :owned_by
+  # Non accessible attributes: :owner_name, :restaurant_id
   scope :collaborative, where(:status=>"Collaborative")
   scope :exclusive, where(:status=>"Exclusive")
 end

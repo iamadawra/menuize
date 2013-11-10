@@ -29,6 +29,9 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
+    if (params[:restaurant][:status] == "Exclusive")
+      params[:restaurant][:owned_by] = current_user.id
+    end
     @restaurant = Restaurant.new(params[:restaurant])
     super
   end
@@ -38,6 +41,9 @@ class RestaurantsController < ApplicationController
   def update
     @restaurant = Restaurant.find(params[:id])
     authorize! :update, @restaurant
+    if (params[:restaurant][:status] == "Exclusive")
+      params[:restaurant][:owned_by] = current_user.id
+    end
     super
   end
 
