@@ -5,7 +5,7 @@ I want to sign up for the application
 So that I can learn about restaurants and their menus, contribute to the information posted, and exclusively control what is displayed about my restaurant if i own it
 
 Background:
-Given that the following users exist:
+Given the following users exist:
 | email | password |
 | johnsnow@gmail.com | john123 |
 | sampeter@yahoo.com | sam123 |

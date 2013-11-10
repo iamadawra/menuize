@@ -27,4 +27,7 @@ When I fill in the following:
 And I select "Exclusive" from "restaurant[status]"
 And I press "Create Restaurant"
 Then I should reach the show page for "Thai Basil"
-And the restaurant "Thai Basil" should not be editable
+And I should see "Waiting for admin confirmation"
+And the restaurant "Thai Basil" should be editable
+When the admin confirms the request for "Thai Basil"
+Then the restaurant "Thai Basil" should not be editable

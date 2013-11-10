@@ -6,7 +6,7 @@ So that I can keep track of the information I have posted, contribute more infor
 
 Background: The user exists in the database
 
-Given that the following users exist:
+Given the following users exist:
 | email | password |
 | johnsnow@gmail.com | john123 |
 | sampeter@yahoo.com | sam123 |

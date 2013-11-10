@@ -13,6 +13,7 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'simplecov'
+  gem 'cancan'
 end
 
 group :production do

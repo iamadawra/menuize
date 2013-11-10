@@ -23,6 +23,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1/edit
   def edit
     @restaurant = Restaurant.find(params[:id])
+    authorize! :edit, @restaurant
   end
 
   # POST /restaurants
@@ -36,6 +37,7 @@ class RestaurantsController < ApplicationController
   # PUT /restaurants/1.json
   def update
     @restaurant = Restaurant.find(params[:id])
+    authorize! :update, @restaurant
     super
   end
 
@@ -43,6 +45,7 @@ class RestaurantsController < ApplicationController
   # DELETE /restaurants/1.json
   def destroy
     @restaurant = Restaurant.find(params[:id])
+    authorize! :destroy, @restaurant
     @restaurant.destroy
     super
   end

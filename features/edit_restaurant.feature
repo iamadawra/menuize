@@ -7,14 +7,14 @@ So that correct information is available on the website for my restaurant.
 Background: My restaurant has already been added.
 
   Given the following restaurants exist:
-  | name | status | zip   | address | open_time | close_time | menu  | owned_by |
-  | Pasta Benne | Exclusive  | 94704 | 1 abc St, Berkeley  |   10 am    |  8 pm   | pizza,pasta | 1 |
-  | Thai Basil  | Exclusive  | 94704 | 2 abc St, Berkeley  | 12 pm | 10 pm  |  thai combo,fried rice | 2 |
+  | name | zip   | address | menu  | owned_by |
+  | Pasta Benne | 94704 | 1 abc St, Berkeley  | pizza,pasta | 1 |
+  | Thai Basil | 94704 | 2 abc St, Berkeley  |  thai combo,fried rice | 2 |
 
-  Given that the following users exist:
-  | name | email | password | id |
-  | John Snow | johnsnow@gmail.com | john123 | 1 |
-  | Sam Peterson | sampeter@yahoo.com | sam123 | 2 |
+  Given the following users exist:
+  | email | password | id |
+  | johnsnow@gmail.com | john123 | 1 |
+  | sampeter@yahoo.com | sam123  | 2 |
   
 Scenario: Edit a restaurant "Pasta Benne" as a non-owner
 Given I am on the edit page for "Pasta Benne"
