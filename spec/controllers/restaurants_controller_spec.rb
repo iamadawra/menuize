@@ -23,7 +23,7 @@ describe RestaurantsController do
   # This should return the minimal set of attributes required to create a valid
   # Restaurant. As you add validations to Restaurant, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { "name" => "MyString", "status"=>"Collaborative" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -106,8 +106,8 @@ describe RestaurantsController do
         # specifies that the Restaurant created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Restaurant.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => restaurant.to_param, :restaurant => { "name" => "MyString" }}, valid_session
+        Restaurant.any_instance.should_receive(:update_attributes).with({ "name" => "MyString", "status" => "Collaborative" })
+        put :update, {:id => restaurant.to_param, :restaurant => { "name" => "MyString", "status" => "Collaborative" }}, valid_session
       end
 
       it "assigns the requested restaurant as @restaurant" do
