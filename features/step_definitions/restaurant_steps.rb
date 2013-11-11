@@ -30,3 +30,25 @@ And (/^"(.*)" should have Close Time equals "(.*)"$/) do |name, time|
   num = num + 12 if timeArr[1] == "pm"
   r.close_time.should eq(num)
 end
+
+Then /^I should see "(.*)" in the row for "(.*)"/ do |value, rowname|
+  has_value_in_row = false
+  all("tr").each do |tr|
+    if tr.has_content?(rowname) && tr.has_content?(value)
+      has_value_in_row = true
+    end
+  end
+  assert has_value_in_row
+end
+
+Then /^I should not see "(.*)" in the row for "(.*)"/ do |value, rowname|
+  has_value_in_row = false
+  all("tr").each do |tr|
+    if tr.has_content?(rowname) && tr.has_content?(value)
+      has_value_in_row = true
+    end
+  end
+  assert !has_value_in_row
+end
+
+
