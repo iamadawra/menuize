@@ -18,6 +18,11 @@ Given /the following restaurants exist/ do |restaurant_table|
   end
 end
 
+Given /^I browse restaurants without logging in/ do
+  visit '/logout'
+  visit '/restaurants'
+end
+
 And (/^"(.*)" should have Close Time equals "(.*)"$/) do |name, time|
   r = Restaurant.find_by_name(name)
   timeArr = time.split(" ")

@@ -35,3 +35,7 @@ And I press "Create Restaurant"
 Then I should reach the show page for "Thai Basil"
 And I should see "Entry was successfully created."
 And the restaurant "Thai Basil" should be awaiting approval
+
+Scenario: When I am not logged in, I should not be able to add a restaurant.
+Given I browse restaurants without logging in
+Then I should not see "New"
