@@ -10,7 +10,7 @@ Given the following users exist:
 | email | password | id |
 | johnsnow@gmail.com | john123 | 1 |
 
-Given the current user is "johnsnow@gmail.com" with password "john123"
+And the current user is "johnsnow@gmail.com" with password "john123"
 And I am on the add restaurant page
 
 Scenario: Add a restaurant "Pasta Benne" as a non-owner
