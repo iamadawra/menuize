@@ -51,4 +51,12 @@ Then /^I should not see "(.*)" in the row for "(.*)"/ do |value, rowname|
   assert !has_value_in_row
 end
 
+When /^I delete "(.*)"/ do |restaurant|
+  all("tr").each do |tr|
+    if tr.has_content?(restaurant)
+      click_link "Delete"
+      break
+    end
+  end
+end
 
