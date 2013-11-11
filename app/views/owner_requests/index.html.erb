@@ -24,7 +24,7 @@
         <td><%= owner_request.restaurant_name %></td>
         <td><%= owner_request.granted %></td>
         <td><%= owner_request.granted_by %></td>
-        <td><%=l owner_request.created_at %></td>
+        <td><%= owner_request.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_owner_request_path(owner_request), :class => 'btn btn-mini' %>
