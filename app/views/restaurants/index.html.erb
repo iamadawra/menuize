@@ -4,8 +4,13 @@
 </div>
 <%= form_tag restaurants_path, :method => 'get', :id => "restaurants_search" do %>
   <p>
+    <table>
+      <tr><td style="padding-top:10px;">
     <%= text_field_tag :search, params[:search], :style=>"height: 30px; width: 700px;", :placeholder=>"Search by Restaurant Name..." %>
+  </td><td style="padding-top:0px; padding-left: 10px;">
     <%= submit_tag "Search", :name => nil, :class => 'btn btn-primary' %>
+  </td></tr>
+</table>
   </p>
   <div id="restaurants">
 <table class="table table-striped">
