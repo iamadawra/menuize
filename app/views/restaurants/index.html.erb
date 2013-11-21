@@ -38,6 +38,9 @@
     <% end %>
   </tbody>
 </table>
+<center>
+<%= will_paginate @restaurants %>
+</center>
 <% if current_user %>
   <%= link_to t('.new', :default => t("helpers.links.new")),
             new_restaurant_path,
