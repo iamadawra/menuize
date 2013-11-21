@@ -32,4 +32,14 @@ class Restaurant < ActiveRecord::Base
     self.owned_by = id
     self.save
   end
+
+  def self.search(search)
+  if search
+    where('name LIKE ?', "%#{search}%")
+  else
+    scoped
+  end
+end
+
+
 end

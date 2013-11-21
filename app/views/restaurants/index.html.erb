@@ -2,6 +2,12 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+<%= form_tag restaurants_path, :method => 'get', :id => "restaurants_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search], :style=>"height: 30px; width: 700px;", :placeholder=>"Search by Restaurant Name..." %>
+    <%= submit_tag "Search", :name => nil, :class => 'btn btn-primary' %>
+  </p>
+  <div id="restaurants">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -45,4 +51,7 @@
   <%= link_to t('.new', :default => t("helpers.links.new")),
             new_restaurant_path,
             :class => 'btn btn-primary' %>
+<% end %>
+
+</div>
 <% end %>
