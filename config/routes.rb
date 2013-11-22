@@ -8,7 +8,7 @@ Menuize::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :restaurants, :sessions, :users
+  resources :restaurants, :sessions, :users, :password_resets
 
   get "login" => "sessions#new", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
