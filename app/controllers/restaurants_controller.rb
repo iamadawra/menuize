@@ -40,11 +40,9 @@ class RestaurantsController < ApplicationController
       OwnerRequest.create(request)
       UserMailer.access_request(current_user, @restaurant).deliver
       @restaurant.mark_pending(current_user.id)
-      if !(file.nil?)
-        Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id, :shown => false })
-      end
-    elsif !(file.nil?)
-      Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id, :shown => true })
+    end
+    if !(file.nil?)
+      Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
     end
     super
   end
@@ -64,11 +62,9 @@ class RestaurantsController < ApplicationController
       params[:restaurant][:status] = "Pending Approval"
       UserMailer.access_request(current_user, @restaurant).deliver
       @restaurant.mark_pending(current_user.id)
-      if !(file.nil?)
-        Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id, :shown => false })
-      end
-    elsif !(file.nil?)
-      Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id, :shown => true })
+    end
+    if !(file.nil?)
+      Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
     end
     super
   end
