@@ -67,7 +67,9 @@
         <dd>
           <% @images.each do |image| %>
             <%= image_tag image.file.url(:medium), :style => "display: inline-block; padding: 8px; white-space: nowrap;" %>
-            <%= link_to "(X)", "/images/#{image.id}", :method => :delete, :confirm => "Are you sure you would like to delete this?" %>
+            <% if can? :destroy, @restaurant %>
+              <%= link_to "(Delete)", "/images/#{image.id}", :method => :delete, :confirm => "Are you sure you would like to delete this?" %>
+            <% end %>
           <% end %>
         </dd>
       </dl>
