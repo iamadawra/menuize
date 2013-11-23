@@ -1,5 +1,8 @@
 Menuize::Application.routes.draw do
 
+  resources :images
+
+
   resources :owner_requests
 
 
@@ -13,8 +16,6 @@ Menuize::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"
   get "signup" => "users#new", :as => "signup"
-
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -16,6 +16,13 @@
   <dd><%= (@restaurant.close_time).to_s + ":00 hrs" %></dd>
   <dt><strong><%= model_class.human_attribute_name(:menu) %>:</strong></dt>
   <dd><%= @restaurant.menu %></dd>
+
+  <dt><strong><%= model_class.human_attribute_name("Images") %>:</strong></dt>
+  <dd>
+  <% @images.each do |image| %>
+    <%= image_tag image.file.url(:medium), :style => "display: inline-block; padding: 8px; white-space: nowrap; float: left;" %>
+  <% end %>
+  </dd>
 </dl>
 
 <div class="form-actions">

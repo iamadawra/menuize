@@ -9,6 +9,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1.json
   def show
     @restaurant = Restaurant.find(params[:id])
+    @images = Image.find_all_by_restaurant_id(params[:id])
     super
   end
 
@@ -23,17 +24,27 @@ class RestaurantsController < ApplicationController
   def edit
     @restaurant = Restaurant.find(params[:id])
     authorize! :edit, @restaurant
+    @images = Image.find_all_by_restaurant_id(params[:id])
   end
 
   # POST /restaurants
   # POST /restaurants.json
   def create
+    if !(params[:restaurant][:file].nil?)
+      file = params[:restaurant][:file]
+      params[:restaurant].delete(:file)
+    end
     @restaurant = Restaurant.new(params[:restaurant])
     if (params[:restaurant][:status] == "Exclusive")
       request = { :user_id => current_user.id, :granted => 0, :restaurant_id => @restaurant.id, :restaurant_name => @restaurant.name}
       OwnerRequest.create(request)
       UserMailer.access_request(current_user, @restaurant).deliver
       @restaurant.mark_pending(current_user.id)
+      if !(file.nil?)
+        Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id, :shown => false })
+      end
+    elsif !(file.nil?)
+      Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id, :shown => true })
     end
     super
   end
@@ -43,12 +54,21 @@ class RestaurantsController < ApplicationController
   def update
     @restaurant = Restaurant.find(params[:id])
     authorize! :update, @restaurant
-    if (params[:restaurant][:status] == "Exclusive")
+    if !(params[:restaurant][:file].nil?)
+      file = params[:restaurant][:file]
+      params[:restaurant].delete(:file)
+    end
+    if (params[:restaurant][:status] == "Exclusive" && @restaurant.owned_by != current_user.id)
       request = { :user_id => current_user.id, :granted => 0, :restaurant_id => @restaurant.id, :restaurant_name => @restaurant.name}
       OwnerRequest.create(request)
       params[:restaurant][:status] = "Pending Approval"
       UserMailer.access_request(current_user, @restaurant).deliver
       @restaurant.mark_pending(current_user.id)
+      if !(file.nil?)
+        Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id, :shown => false })
+      end
+    elsif !(file.nil?)
+      Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id, :shown => true })
     end
     super
   end
