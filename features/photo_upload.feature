@@ -8,6 +8,7 @@ As a non-business owner
 I want to be able to upload pictures for collaborative restaurants
 So that other users know what to expect at a restaurant before they visit it.
 
+Background:
   Given the following restaurants exist:
   | name | zip   | address | menu  | owned_by | status |
   | Pasta Benne | 94704 | 1 abc St, Berkeley  | pizza,pasta | 1 | Exclusive |
@@ -22,21 +23,25 @@ So that other users know what to expect at a restaurant before they visit it.
   | george@gmail.com | george123 | 3 |
 
 Scenario: Owner can exclusively add and delete photos.
-Given the curent user is "johnsnow@gmail.com" with password "john123"
-And I am on the show page for "Pasta Benne"
-Then I should see "Images of Pasta Benne"
-And I should see "Add Photo" in the row for "Images of Pasta Benne"
-
-Scenario: Non-owner cannot add or delete photos for an exclusive restaurant.
 Given the current user is "johnsnow@gmail.com" with password "john123"
-And I am on the show page for "Thai Basil"
-Then I should see "Images of Thai Basil"
-And I should not see "Add Photo" in the row for "Images of Thai Basil"
-And I should not see "Delete Photo" in the row for "Images of Thai Basil"
+And I am on the edit page for "Pasta Benne"
+Then I should see "Upload Photo"
+And I attach "mushroom.png"
+And I press "Update Restaurant"
+Then I should reach the show page for "Pasta Benne"
+And I should see "Entry was successfully updated."
+And the page should have the "Mushroom" image
 
 Scenario: Everyone can add photos for a collaborative restaurant.
 Given the current user is "johnsnow@gmail.com" with password "john123"
-And I am on the show page for "Taco Bell"
-Then I should see "Images of Taco Bell"
-And I should see "Add Photo" in the row for "Images of Taco Bell"
-And I should not see "Delete Photo in the row for "Images of Taco Bell"
+And I am on the edit page for "Taco Bell"
+Then I should see "Upload Photo"
+
+Scenario: Everyone adding photos for collaborative restaurant works.
+Given the current user is "johnsnow@gmail.com" with password "john123"
+And I am on the edit page for "Taco Bell"
+And I attach "mushroom.png"
+And I press "Update Restaurant"
+Then I should reach the show page for "Taco Bell"
+And I should see "Entry was successfully updated."
+And the page should have the "Mushroom" image
