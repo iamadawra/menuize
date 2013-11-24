@@ -21,6 +21,7 @@ module NavigationHelpers
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
 
+    when /^the restaurant page$/ then '/restaurants'
     when /^the add restaurant page$/ then '/restaurants/new'
     when /^the show page for "(.*)*"$/ then
       restaurant_path(Restaurant.find_by_name($1))
