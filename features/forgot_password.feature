@@ -4,19 +4,17 @@ As a user
 I want to receive an email with instructions on how to reset my password
 So that I may reset my password in case I forget my old password
 
-  And the following users exist:
-  | email | password | id |
-  | bazinga@gmail.com | bazinga123 | 1 |
-  | hello@gmail.com | hello123  | 2 |
-  | boss@gmail.com | boss123 | 3 |
-  And I am on the login page
-
 Scenario: User tries to log in with correct email
-Given I fill in "email" with "bazinga@gmail.com"
-And I press "Forgot my Password!"
-Then I should see "Password Reset Instructions have been sent to bazinga@gmail.com"
+Given I sign up as "bazinga@gmail.com" with password "bazinga123"
+And I am on the login page
+And I follow "Forgotten Your Password?"
+And I fill in "email" with "bazinga@gmail.com"
+And I press "Reset Password"
+Then I should see "Email sent with password reset instructions."
 
 Scenario: User tries to log in with incorrect email
-Given I fill in "email" with "hello@gmail.com"
-And I press "Forgot my Password!"
-Then I should see "We're sorry, there is no registered user with the given email"
+Given I am on the login page
+And I follow "Forgotten Your Password?"
+And I fill in "email" with "test@gmail.com"
+And I press "Reset Password"
+Then I should see "Sorry! User with the specified email does not exist."
