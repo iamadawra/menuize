@@ -6,10 +6,18 @@
   <p>
     <table>
       <tr><td style="padding-top:10px;">
-    <%= text_field_tag :search, params[:search], :style=>"height: 30px; width: 700px;", :placeholder=>"Search by Restaurant Name..." %>
-  </td><td style="padding-top:0px; padding-left: 10px;">
+    <%= text_field_tag :search, params[:search], :style=>"height: 30px; width: 350px;", :placeholder=>"Search by Restaurant Name..." %>
+    
+    <td style="padding-top:10px;">
+    <%= text_field_tag :searchZip, params[:searchZip], :style=>"height: 30px; width: 250px;", :placeholder=>"Search by Zip Code..." %>
+  </td>
+  </td>
+  <td style="padding-top:0px; padding-left: 10px;">
     <%= submit_tag "Search", :name => nil, :class => 'btn btn-primary' %>
   </td></tr>
+  
+  
+  
 </table>
   </p>
   <div id="restaurants">

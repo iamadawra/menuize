@@ -33,13 +33,16 @@ class Restaurant < ActiveRecord::Base
     self.save
   end
 
-  def self.search(search)
-  if search
-    where('name LIKE ?', "%#{search}%")
-  else
-    scoped
+  def self.search(name, zip)
+    result = scoped
+    if name
+      result = result.where('name LIKE ?', "%#{name}%")
+    end
+    
+    if !zip.nil? and zip.length!=0   # length==5?
+      result = result.where(zip: zip.to_i)
+    end
+    return result
   end
-end
-
 
 end
