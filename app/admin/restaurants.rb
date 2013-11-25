@@ -11,4 +11,8 @@ ActiveAdmin.register Restaurant do
   	column :updated_at
   	default_actions
   end
+
+  action_item :only => :show do
+    link_to('View on site', restaurants_path(restaurant))
+  end
 end
