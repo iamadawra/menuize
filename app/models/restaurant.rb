@@ -33,12 +33,22 @@ class Restaurant < ActiveRecord::Base
     self.save
   end
 
+  def mark_collaborative
+    self.status = "Collaborative"
+    self.save
+  end
+
+  def mark_exclusive
+    self.status = "Exclusive"
+    self.save
+  end
+
   def self.search(name, zip)
     result = scoped
     if name
       result = result.where('name LIKE ?', "%#{name}%")
     end
-    
+
     if !zip.nil? and zip.length!=0   # length==5?
       result = result.where(zip: zip.to_i)
     end

@@ -77,4 +77,16 @@ class RestaurantsController < ApplicationController
     @restaurant.destroy
     super
   end
+
+  # PUT /restaurants/1/approve
+  def approve
+    @req = OwnerRequest.find_by_restaurant_id(params[:id])
+    @req.approve
+  end
+
+  # PUT /restaurants/1/deny
+  def deny
+    @req = OwnerRequest.find_by_restaurant_id(params[:id])
+    @req.deny
+  end
 end

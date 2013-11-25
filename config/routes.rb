@@ -17,6 +17,9 @@ Menuize::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "signup" => "users#new", :as => "signup"
 
+  put "/restaurants/:id/approve" => "restaurants#approve", :as => "restaurant_approve"
+  put "/restaurants/:id/deny" => "restaurants#deny", :as => "restaurant_deny"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
