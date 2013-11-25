@@ -21,7 +21,7 @@
 #
 
 class Restaurant < ActiveRecord::Base
-  attr_accessible :name, :status, :open_time, :close_time, :address, :city, :zip, :description, :menu, :owned_by
+  attr_accessible :name, :status, :open_time, :close_time, :address, :city, :zip, :description, :menu, :owned_by, :id
   # Non accessible attributes: :owner_name, :restaurant_id
   scope :collaborative, where(:status=>"Collaborative")
   scope :exclusive, where(:status=>"Exclusive")
@@ -35,6 +35,7 @@ class Restaurant < ActiveRecord::Base
 
   def mark_collaborative
     self.status = "Collaborative"
+    self.owned_by = nil
     self.save
   end
 

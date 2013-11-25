@@ -35,6 +35,7 @@ class RestaurantsController < ApplicationController
       params[:restaurant].delete(:file)
     end
     @restaurant = Restaurant.new(params[:restaurant])
+    @restaurant.save
     if (params[:restaurant][:status] == "Exclusive")
       request = { :user_id => current_user.id, :granted => 0, :restaurant_id => @restaurant.id, :restaurant_name => @restaurant.name}
       OwnerRequest.create(request)
@@ -80,13 +81,21 @@ class RestaurantsController < ApplicationController
 
   # PUT /restaurants/1/approve
   def approve
-    @req = OwnerRequest.find_by_restaurant_id(params[:id])
-    @req.approve
+    @restaurant = Restaurant.find(params[:id])
+    if @restaurant
+      @req = (OwnerRequest.find_by_restaurant_id(@restaurant.id))
+      @req.approve
+      redirect_to(request.env["HTTP_REFERER"])
+    end
   end
 
   # PUT /restaurants/1/deny
   def deny
-    @req = OwnerRequest.find_by_restaurant_id(params[:id])
-    @req.deny
+    @restaurant = Restaurant.find(params[:id])
+    if @restaurant
+      @req = (OwnerRequest.find_by_restaurant_id(@restaurant.id))
+      @req.deny
+      redirect_to(request.env["HTTP_REFERER"])
+    end
   end
 end
