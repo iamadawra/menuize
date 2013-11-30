@@ -8,8 +8,9 @@
     <dl class="dl-horizontal">
       <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
       <dd><%= @restaurant.status %></dd> <br>
-      <% if (!@restaurant.address.nil? && !@restaurant.zip.nil? &&
-             !@restaurant.city.nil?) %>
+      <% if (!@restaurant.address.nil? && !@restaurant.address.length == 0 &&
+             !@restaurant.zip.nil? && !@restaurant.zip.length == 0 &&
+             !@restaurant.city.nil? && !@restaurant.city.length == 0) %>
         <dt><strong>Address: </strong></dt>
         <dd><%= @restaurant.address.to_s %><br><%= @restaurant.city.to_s + ", " + @restaurant.zip.to_s %> </dd><br>
       <% end %>
