@@ -597,6 +597,23 @@ dd {
   margin-left: 0;
 }
 
+.half-width {
+  width: 50%;
+}
+
+.descriptions {
+  float: left;
+}
+
+.image-list {
+  margin-top: 13px;
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
 @media (min-width: 768px) {
   .dl-horizontal dt {
     float: left;

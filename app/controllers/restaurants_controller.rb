@@ -10,6 +10,8 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
     @images = Image.find_all_by_restaurant_id(params[:id])
+    menu = @restaurant.menu
+    @menu = menu.split(',') if !(menu.nil?)
     super
   end
 

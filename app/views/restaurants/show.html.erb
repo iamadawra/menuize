@@ -1,33 +1,45 @@
 <%- model_class = Restaurant -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= @restaurant.name %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @restaurant.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-  <dd><%= @restaurant.status %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @restaurant.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:open_time) %>:</strong></dt>
-  <dd><%= (@restaurant.open_time).to_s + ":00 hrs" %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:close_time) %>:</strong></dt>
-  <dd><%= (@restaurant.close_time).to_s + ":00 hrs" %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:menu) %>:</strong></dt>
-  <dd><%= @restaurant.menu %></dd>
-
-  <dt><strong><%= model_class.human_attribute_name("Images") %>:</strong></dt>
-  <dd>
-  <% @images.each do |image| %>
-    <%= image_tag image.file.url(:medium), :style => "display: inline-block; padding: 8px; white-space: nowrap; float: left;" %>
-  <% end %>
-  </dd>
-</dl>
+<div class="descriptions-and-images">
+  <div class="descriptions half-width">
+    <dl class="dl-horizontal">
+      <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+      <dd><%= @restaurant.status %></dd> <br>
+      <% if (!@restaurant.address.nil? && !@restaurant.zip.nil? &&
+             !@restaurant.city.nil?) %>
+        <dt><strong>Address: </strong></dt>
+        <dd><%= @restaurant.address.to_s %><br><%= @restaurant.city.to_s + ", " + @restaurant.zip.to_s %> </dd><br>
+      <% end %>
+      <dt><strong>Open Hours:</strong></dt>
+      <dd><%= (@restaurant.open_time).to_s + ":00 hrs - " + @restaurant.close_time.to_s + ":00 hrs"%></dd> <br>
+      <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+      <dd><%= @restaurant.description %></dd> <br>
+      <dt><strong><%= model_class.human_attribute_name(:menu) %>:</strong></dt>
+      <% if !(@menu.nil?) && !(@menu.length == 0) %>
+        <% @menu.each do |item| %>
+          <dd><%= "- " + item %></dd>
+        <% end %>
+        <br>
+      <% else %>
+        <dd>(No menu available currently)</dd> <br>
+      <% end %>
+    </dl>
+  </div>
+  <div class="image-list half-width">
+    <strong style="padding-left: 8px;">Images</strong><br>
+    <% @images.each do |image| %>
+      <%= image_tag image.file.url(:medium), :style => "display: inline-block; padding: 8px; white-space: nowrap; float: left;" %>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              restaurants_path, :class => 'btn' %>
+                restaurants_path, :class => 'btn' %>
   <% if !(current_user.nil?) %>
     <% if can? :edit, @restaurant %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
