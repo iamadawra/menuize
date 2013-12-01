@@ -605,6 +605,10 @@ dd {
   width: 50%;
 }
 
+.descriptions-and-images {
+  font-size: 16px;
+}
+
 .descriptions {
   float: left;
 }

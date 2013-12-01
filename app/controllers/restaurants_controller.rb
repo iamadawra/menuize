@@ -12,9 +12,14 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1.json
   def show
     @restaurant = Restaurant.find(params[:id])
-    @images = Image.find_all_by_restaurant_id(params[:id])
+    @images = Image.find_all_by_restaurant_id(params[:id]) || {}
+    if (@images.length != 0)
+      @image_header = @images[0].file.url(:thumb)
+    else
+      @image_header = "/assets/missing.png"
+    end
     menu = @restaurant.menu
-    @menu = menu.split(',') if !(menu.nil?)
+    @menu = menu.split(',').map(&:strip) if !(menu.nil?)
     super
   end
 

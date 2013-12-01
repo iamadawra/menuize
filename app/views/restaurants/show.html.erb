@@ -1,13 +1,14 @@
 <%- model_class = Restaurant -%>
 <div class="page-header">
-  <h1><%= @restaurant.name %></h1>
+  <%= image_tag @image_header, :style => "height:50px; width:50px;"%>
+  <h1 style="display:inline; margin-left: 15px; position: absolute;"><%= @restaurant.name %></h1>
 </div>
 
 <div class="descriptions-and-images">
   <div class="descriptions half-width">
     <dl class="dl-horizontal">
       <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-      <dd><%= @restaurant.status %></dd> <br>
+      <dd><%= @restaurant.status %></dd><br>
       <% if (!@restaurant.address.nil? && !@restaurant.address.length == 0 &&
              !@restaurant.zip.nil? && !@restaurant.zip.length == 0 &&
              !@restaurant.city.nil? && !@restaurant.city.length == 0) %>
@@ -18,16 +19,20 @@
       <dd><%= (@restaurant.open_time).to_s + ":00 hrs - " + @restaurant.close_time.to_s + ":00 hrs"%></dd> <br>
       <div class="line-bottom">
         <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-        <dd><%= @restaurant.description %></dd> <br>
+        <% if !@restaurant.description.nil? &&
+              !(@restaurant.description.length == 0) %>
+          <dd><%= @restaurant.description %></dd> <br>
+        <% else %><dd>(No desciption currently available)</dd><br>
+        <% end %>
       </div><br>
       <dt><strong><%= model_class.human_attribute_name(:menu) %>:</strong></dt>
       <% if !(@menu.nil?) && !(@menu.length == 0) %>
         <% @menu.each do |item| %>
-          <dd><%= "- " + item %></dd>
+          <dd><%= image_tag ("/assets/small-star.gif"), :style => "height: 20px; width: 20px" %>&nbsp;&nbsp;&nbsp;<i><%= item %></i></dd>
         <% end %>
         <br>
       <% else %>
-        <dd>(No menu available currently)</dd> <br>
+        <dd>(No menu currently available)</dd> <br>
       <% end %>
     </dl>
   </div>
