@@ -11,7 +11,14 @@ Menuize::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :restaurants, :sessions, :users, :password_resets
+  resources :sessions, :users, :password_resets
+
+  resources :restaurants do
+    collection do
+      put :update_attribute_on_the_spot
+      get :get_attribute_on_the_spot
+    end
+  end
 
   get "login" => "sessions#new", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"

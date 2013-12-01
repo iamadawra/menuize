@@ -59,6 +59,9 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.1.2)
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (~> 3.1)
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     bourbon (3.1.8)
@@ -126,6 +129,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    json_pure (1.8.1)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -153,6 +157,8 @@ GEM
     multi_test (0.0.2)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    on_the_spot (1.0.1)
+      json_pure (>= 1.4.6)
     orm_adapter (0.4.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
@@ -259,6 +265,7 @@ DEPENDENCIES
   annotate!
   aws-sdk
   bcrypt-ruby
+  best_in_place
   bootstrap-sass
   cancan
   capybara
@@ -271,6 +278,7 @@ DEPENDENCIES
   launchy
   less-rails
   mail
+  on_the_spot
   paperclip (~> 3.0)
   pg
   rails (= 3.2.14)

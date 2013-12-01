@@ -24,34 +24,52 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:open_time) %></th>
-      <th><%= model_class.human_attribute_name(:close_time) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @restaurants.each do |restaurant| %>
       <tr>
-        <td><%= link_to restaurant.name, restaurant_path(restaurant) %></td>
-        <td><%= restaurant.status %></td>
-        <td><%= (restaurant.open_time).to_s + ":00 hrs" %></td>
-        <td><%= (restaurant.close_time).to_s + ":00 hrs" %></td>
+        <% @image = Image.find_by_restaurant_id(restaurant.id) %>
+        <% if @image.nil? %>
+          <td><div style="margin-left:20px;"><%= image_tag (Rails.root.join('public').to_s + "/missing.png"), :style=>"display: inline-block; height: 200px; padding:4px;" %></div></td>
+        <% else %>
+          <td><div style="margin-left:20px;"><%= image_tag @image.file, :style=>"display: inline-block; height: 200px; padding: 4px;" %></div></td>
+        <% end %>
         <td>
-          <% if !(current_user.nil?) %>
-            <% if can? :edit, restaurant %>
-              <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                          edit_restaurant_path(restaurant), :class => 'btn btn-mini' %>
-            <% end %>
-            <% if can? :destroy, restaurant %>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                          restaurant_path(restaurant),
-                          :method => :delete,
-                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-mini btn-danger' %>
-            <% end %>
-          <% end %>
+          <div style="float:right; margin-right:20px;font-style: Helvetica;">
+            <div>
+              <%= link_to restaurant.name, restaurant_path(restaurant), :style=>"font-size: 25px;float:right;" %>
+            </div>
+            <div style="height:50px;"></div>
+            <div style="float:right; font-size:16px;">
+              <b>Ownership: </b><%= restaurant.status %>
+            </div>
+            <div style="height:20px;"></div>
+            <div style="float:right; font-size:16px;">
+              <b>Hours: </b><%= (restaurant.open_time).to_s + ":00 hrs" %> to <%= (restaurant.close_time).to_s + ":00 hrs" %>
+            </div>
+            <div style="height:20px;"></div>
+            <div style="float:right; font-size:16px;">
+              <b>About: </b>
+              <% if restaurant.description.empty? %>
+                (No Description given)
+              <% else %>
+                <%= restaurant.description %>
+              <% end %>
+            </div>
+            <div style="height:50px;"></div>
+            <div style="float:right;">
+              <% if !(current_user.nil?) %>
+                <% if can? :edit, restaurant %>
+                  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                              edit_restaurant_path(restaurant), :class => 'btn' %>
+                <% else %>
+                  <b><i>This Restaurant is exclusively owned.</i></b>
+                <% end %>
+              <% else %>
+                <%= link_to "Learn More", restaurant_path(restaurant), :class => 'btn' %>
+              <% end %>
+          </div>
         </td>
       </tr>
     <% end %>

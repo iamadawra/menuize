@@ -1,4 +1,7 @@
 class RestaurantsController < ApplicationController
+
+  can_edit_on_the_spot
+
   # GET /restaurants
   # GET /restaurants.json
   def index

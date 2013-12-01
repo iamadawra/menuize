@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap
-//= require_tree .
+//= require_tree
+//= require jquery.purr
+//= require on_the_spot
