@@ -6,7 +6,7 @@
   <p>
     <table>
       <tr><td style="padding-top:10px;">
-    <%= text_field_tag :search, params[:search], :style=>"height: 30px; width: 350px;", :placeholder=>"Search by Restaurant Name..." %>
+    <%= text_field_tag :search, params[:search], :style=>"height: 30px; width: 390px;", :placeholder=>"Search by Restaurant Name..." %>
 
     <td style="padding-top:10px;">
     <%= text_field_tag :searchZip, params[:searchZip], :style=>"height: 30px; width: 250px;", :placeholder=>"Search by Zip Code..." %>
@@ -14,7 +14,13 @@
   </td>
   <td style="padding-top:0px; padding-left: 10px;">
     <%= submit_tag "Search", :name => nil, :class => 'btn btn-primary' %>
-  </td></tr>
+  </td>
+  <td>
+    <% if current_user %>
+      <%= link_to "Add a Restaurant!", new_restaurant_path, :class => 'btn btn-success' %>
+    <% end %>
+  </td>
+</tr>
 
 
 
@@ -78,11 +84,5 @@
 <center>
 <%= will_paginate @restaurants %>
 </center>
-<% if current_user %>
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_restaurant_path,
-            :class => 'btn btn-primary' %>
-<% end %>
-
 </div>
 <% end %>
