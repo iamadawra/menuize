@@ -5,7 +5,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   # GET /restaurants.json
   def index
-    @restaurants = Restaurant.search(params[:search], params[:searchZip]).paginate(:per_page => 5, :page => params[:page])
+    @restaurants = Restaurant.search(params[:search], params[:searchZip]).paginate(:per_page => 5, :page => params[:page]).find_with_reputation(:votes, :all, order: "votes desc")
   end
 
   # GET /restaurants/1
@@ -107,5 +107,12 @@ class RestaurantsController < ApplicationController
       @req.deny
       redirect_to(request.env["HTTP_REFERER"])
     end
+  end
+
+  def vote
+    value = params[:type] == "Like" ? 1 : -1
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.add_or_update_evaluation(:votes, value, current_user)
+    redirect_to :back, notice: "Thank You! Your vote has been registered."
   end
 end

@@ -14,6 +14,7 @@ Menuize::Application.routes.draw do
   resources :sessions, :users, :password_resets
 
   resources :restaurants do
+    member { post :vote }
     collection do
       put :update_attribute_on_the_spot
       get :get_attribute_on_the_spot

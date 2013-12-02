@@ -26,6 +26,7 @@ class Restaurant < ActiveRecord::Base
   scope :collaborative, where(:status=>"Collaborative")
   scope :exclusive, where(:status=>"Exclusive")
   scope :pending_approval, where(:status=>"Pending Approval")
+  has_reputation :votes, source: :user, aggregated_by: :sum
 
   def mark_pending(id)
     self.status = "Pending Approval"

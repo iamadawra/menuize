@@ -3,6 +3,8 @@
 <%= link_to "Back to All Restaurants",restaurants_path, :class => 'btn' %>
 <div style="float:right;">
   <% if !(current_user.nil?) %>
+    <%= link_to "Like", vote_restaurant_path(@restaurant, type: "Like"), method: "post", :class => "btn btn-success" %> 
+    <%= link_to "Dislike", vote_restaurant_path(@restaurant, type: "Dislike"), method: "post", :class=>"btn btn-danger" %>
     <% if can? :edit, @restaurant %>
       <%= link_to "Edit Restaurant",
                   edit_restaurant_path(@restaurant), :class => 'btn btn-primary' %>
@@ -22,7 +24,19 @@
   <td><div style="float:right; margin-right:20px;">
   <h1><%= @restaurant.name %></h1>
   </div>
-  <div style="height:100px;"></div>
+  <div style="height:70px;"></div>
+  <div style="float:right; font-size:20px;margin-right:20px;">
+    <i>
+    <% if @restaurant.reputation_for(:votes).to_i == 0 %>
+      0 Likes
+    <% elsif @restaurant.reputation_for(:votes).to_i > 0 %>
+      <%= pluralize @restaurant.reputation_for(:votes).to_i, "Like" %>
+    <% else %>
+      <%= pluralize @restaurant.reputation_for(:votes).to_i.abs, "Dislike" %>
+    </i>
+  <% end %>
+  </div>
+  <div style="height:50px;"></div>
   <div style="float:right; font-size:20px;margin-right:20px;">
   <b>Ownership: </b><%= @restaurant.status %>
   </div>
@@ -71,7 +85,6 @@
   <div class="clear"></div>
 </div>
 <div class="line-bottom"></div>
-
 
 <% if !(current_user.nil?) %>
     <% if can? :destroy, @restaurant %>
