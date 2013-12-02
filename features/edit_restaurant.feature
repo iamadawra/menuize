@@ -7,11 +7,11 @@ So that correct information is available on the website for my restaurant.
 Background: My restaurant has already been added.
 
   Given the following restaurants exist:
-  | name | zip   | address | menu  | owned_by | status |
-  | Pasta Benne | 94704 | 1 abc St, Berkeley  | pizza,pasta | 1 | Exclusive |
-  | Thai Basil | 94704 | 2 abc St, Berkeley  |  thai combo,fried rice | 2 | Exclusive |
-  | Racha | 94704 | 3 abc St, Berkeley | soup | 1 | Pending Approval |
-  | Taco Bell | 9470 | 4 abc St, Berkeley | burrito | | Collaborative |
+  | name | zip   | address | menu  | owned_by | status | description |
+  | Pasta Benne | 94704 | 1 abc St, Berkeley  | pizza,pasta | 1 | Exclusive | Tasty |
+  | Thai Basil | 94704 | 2 abc St, Berkeley  |  thai combo,fried rice | 2 | Exclusive | Tasty |
+  | Racha | 94704 | 3 abc St, Berkeley | soup | 1 | Pending Approval | Tasty |
+  | Taco Bell | 9470 | 4 abc St, Berkeley | burrito | | Collaborative | Tasty |
 
   And the following users exist:
   | email | password | id |

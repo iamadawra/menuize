@@ -7,11 +7,11 @@ So that I can find a particular restaurant.
 Background: There are several restaurants in the database.
 
   Given the following restaurants exist:
-  | name | zip   | address | menu  | owned_by | status |
-  | Pasta Benne | 94704 | 1 abc St, Berkeley  | pizza,pasta | 1 | Exclusive |
-  | Thai Basil | 94701 | 2 abc St, Berkeley  |  thai combo,fried rice | 2 | Exclusive |
-  | Racha | 94704 | 3 abc St, Berkeley | soup | 1 | Pending Approval |
-  | Taco Bell | 94704 |  abc St, Berkeley | burrito | | Collaborative |
+  | name | zip   | address | menu  | owned_by | status | description |
+  | Pasta Benne | 94704 | 1 abc St, Berkeley  | pizza,pasta | 1 | Exclusive | Tasty |
+  | Thai Basil | 94701 | 2 abc St, Berkeley  |  thai combo,fried rice | 2 | Exclusive | Tasty |
+  | Racha | 94704 | 3 abc St, Berkeley | soup | 1 | Pending Approval | Tasty |
+  | Taco Bell | 94704 |  abc St, Berkeley | burrito | | Collaborative | Tasty |
 
 Given I am on the restaurant page
 
