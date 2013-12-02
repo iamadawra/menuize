@@ -40,7 +40,7 @@
         <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
         <% if !@restaurant.description.nil? &&
               !(@restaurant.description.length == 0) %>
-          <dd><div style="font-size: 16px;"><%= @restaurant.description %></div></dd> <br>
+          <dd><br><br><div style="font-size: 16px;"><%= @restaurant.description %></div></dd> <br>
         <% else %><br><dd><i>(No desciption currently available)</i></dd><br>
         <% end %><br>
       </div>
