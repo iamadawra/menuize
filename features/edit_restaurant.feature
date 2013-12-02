@@ -26,7 +26,6 @@ Then I should not see "Edit" in the row for "Thai Basil"
 Scenario: Can edit a restaurant "Thai Basil" as the owner
 Given the current user is "sampeter@yahoo.com" with password "sam123"
 Then I should see "Edit" in the row for "Thai Basil"
-And I should see "Delete" in the row for "Thai Basil"
 
 Scenario: Pending restaurant cannot be edited by non-requester
 Given the current user is "sampeter@yahoo.com" with password "sam123"
@@ -51,6 +50,7 @@ Then the restaurant "Taco Bell" should be awaiting approval
 
 Scenario: Owner deletes restaurant they own
 Given the current user is "sampeter@yahoo.com" with password "sam123"
+And I am on the show page for "Thai Basil"
 And I delete "Thai Basil"
 Then I should be on the restaurants page
 And I should not see "Thai Basil"

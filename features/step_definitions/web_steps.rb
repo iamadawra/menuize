@@ -76,6 +76,10 @@ end
 # TODO: Add support for checkbox, select or option
 # based on naming conventions.
 #
+Given /^I wait for (\d+) milliseconds?$/ do |n|
+  sleep((n.to_i)/1000)
+end
+
 When /^(?:|I )fill in the following:$/ do |fields|
   fields.rows_hash.each do |name, value|
     When %{I fill in "#{name}" with "#{value}"}
