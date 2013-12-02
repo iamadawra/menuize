@@ -11,61 +11,78 @@
 </div>
 </div>
 <div class="line-bottom"></div>
-<div class="page-header">
-  <%= image_tag @image_header, :style => "height:50px; width:50px;"%>
-  <h1 style="display:inline; margin-left: 15px; position: absolute;"><%= @restaurant.name %></h1>
+<div class="page-header" style="font-style: Helvetica;">
+  <table class="table table-striped"><tr>
+  <% @image = Image.find_by_restaurant_id(@restaurant.id) %>
+        <% if @image.nil? %>
+          <td><div style="margin-left:20px;"><%= image_tag ("/assets/missing.png"), :style=>"display: inline-block; height: 200px; padding:4px;" %></div></td>
+        <% else %>
+          <td><div style="margin-left:20px;"><%= image_tag @image.file, :style=>"display: inline-block; height: 200px; padding: 4px;" %></div></td>
+        <% end %>
+  <td><div style="float:right; margin-right:20px;">
+  <h1><%= @restaurant.name %></h1>
+  </div>
+  <div style="height:100px;"></div>
+  <div style="float:right; font-size:20px;margin-right:20px;">
+  <b>Ownership: </b><%= @restaurant.status %>
+  </div>
+  <div style="height:30px;"></div>
+  <div style="float:right; font-size:20px;margin-right:20px;">
+  <b>Hours: </b><%= (@restaurant.open_time).to_s + ":00 hrs" %> to <%= (@restaurant.close_time).to_s + ":00 hrs" %>
+            </div>
+</td></tr></table>
 </div>
 
-<div class="descriptions-and-images">
-  <div class="descriptions half-width">
-    <dl class="dl-horizontal">
-      <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-      <dd><%= @restaurant.status %></dd><br>
-      <% if (!@restaurant.address.nil? && !@restaurant.address.length == 0 &&
-             !@restaurant.zip.nil? && !@restaurant.zip.length == 0 &&
-             !@restaurant.city.nil? && !@restaurant.city.length == 0) %>
-        <dt><strong>Address: </strong></dt>
-        <dd><%= @restaurant.address.to_s %><br><%= @restaurant.city.to_s + ", " + @restaurant.zip.to_s %> </dd><br>
-      <% end %>
-      <dt><strong>Open Hours:</strong></dt>
-      <dd><%= (@restaurant.open_time).to_s + ":00 hrs - " + @restaurant.close_time.to_s + ":00 hrs"%></dd> <br>
-      <div class="line-bottom">
-        <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+<div style="font-style:Helvetica; font-size:20px;">
+  <div>
+    <dl>
+      <div style="padding-top: 10px;margin-left:60px;">
+        <dt><strong>About <%= @restaurant.name %></strong></dt>
         <% if !@restaurant.description.nil? &&
               !(@restaurant.description.length == 0) %>
-          <dd><%= @restaurant.description %></dd> <br>
-        <% else %><dd>(No desciption currently available)</dd><br>
-        <% end %>
-      </div><br>
-      <dt><strong><%= model_class.human_attribute_name(:menu) %>:</strong></dt>
+          <dd><br><br><div style="font-size: 16px;"><%= @restaurant.description %></div></dd> <br>
+        <% else %><br><dd><i>(No desciption currently available)</i></dd><br>
+        <% end %><br>
+      </div>
+      <div class="line-bottom"></div>
+      <div style="padding-top: 30px;margin-left:60px;">
+      <dt><strong><%= model_class.human_attribute_name(:menu) %></strong></dt>
       <% if !(@menu.nil?) && !(@menu.length == 0) %>
+        <br><br><table class="table table-striped">
         <% @menu.each do |item| %>
-          <dd><%= image_tag ("/assets/small-star.gif"), :style => "height: 20px; width: 20px" %>&nbsp;&nbsp;&nbsp;<i><%= item %></i></dd>
+          <tr><td>
+          <dd><%= image_tag ("/assets/small-star.gif"), :style => "height: 20px; width: 20px" %>&nbsp;&nbsp;&nbsp;<i><%= item %></i></dd></td></tr>
         <% end %>
+        </table>
         <br>
       <% else %>
-        <dd>(No menu currently available)</dd> <br>
+        <dd><br><i>(No menu currently available)</i></dd> <br>
       <% end %>
+      </div>
     </dl>
   </div>
-  <div class="image-list half-width">
-    <strong style="padding-left: 8px;">Images</strong><br>
+  <div class="line-bottom"></div>
+  <div style="padding-top: 30px; margin-left: 60px;">
+    <strong style="padding-left: 8px;">More Images</strong><br><br>
     <% @images.each do |image| %>
       <%= image_tag image.file.url(:medium), :style => "display: inline-block; padding: 8px; white-space: nowrap; float: left;" %>
     <% end %>
   </div>
   <div class="clear"></div>
 </div>
-<div class="form-actions">
+<div class="line-bottom"></div>
+
+
 <% if !(current_user.nil?) %>
     <% if can? :destroy, @restaurant %>
-      <center>
-      <%= link_to "Delete This Restaurant",
-                  restaurant_path(@restaurant),
-                  :method => 'delete',
-                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                  :class => 'btn btn-danger' %>
-      </center>
+      <div class="form-actions">
+        <center>
+        <%= link_to "Delete This Restaurant",
+                    restaurant_path(@restaurant),
+                    :method => 'delete',
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                    :class => 'btn btn-danger' %>
+        </center>
+      </div>
     <% end %>
   <% end %>
-</div>
