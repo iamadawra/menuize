@@ -37,7 +37,7 @@
   <div>
     <dl>
       <div style="padding-top: 10px;margin-left:60px;">
-        <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+        <dt><strong>About <%= @restaurant.name %></strong></dt>
         <% if !@restaurant.description.nil? &&
               !(@restaurant.description.length == 0) %>
           <dd><br><br><div style="font-size: 16px;"><%= @restaurant.description %></div></dd> <br>
@@ -46,7 +46,7 @@
       </div>
       <div class="line-bottom"></div>
       <div style="padding-top: 30px;margin-left:60px;">
-      <dt><strong><%= model_class.human_attribute_name(:menu) %>:</strong></dt>
+      <dt><strong><%= model_class.human_attribute_name(:menu) %></strong></dt>
       <% if !(@menu.nil?) && !(@menu.length == 0) %>
         <br><br><table class="table table-striped">
         <% @menu.each do |item| %>
@@ -70,6 +70,7 @@
   </div>
   <div class="clear"></div>
 </div>
+<div class="line-bottom"></div>
 
 
 <% if !(current_user.nil?) %>
