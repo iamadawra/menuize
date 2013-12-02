@@ -37,9 +37,9 @@
       <tr>
         <% @image = Image.find_by_restaurant_id(restaurant.id) %>
         <% if @image.nil? %>
-          <td><div style="margin-left:20px;"><%= image_tag ("/assets/missing.png"), :style=>"display: inline-block; height: 200px; padding:4px;" %></div></td>
+          <td><div style="margin-left:20px; min-width: 400px;"><%= image_tag ("/assets/missing.png"), :style=>"display: inline-block; height: 200px; padding:4px;" %></div></td>
         <% else %>
-          <td><div style="margin-left:20px;"><%= image_tag @image.file, :style=>"display: inline-block; height: 200px; padding: 4px;" %></div></td>
+          <td><div style="margin-left:20px; min-width:400px;"><%= image_tag @image.file, :style=>"display: inline-block; height: 200px; padding: 4px;" %></div></td>
         <% end %>
         <td>
           <div style="float:right; margin-right:20px;font-style: Helvetica;">
@@ -62,17 +62,17 @@
             <div style="float:right; font-size:16px;">
               <b>Ownership: </b><%= restaurant.status %>
             </div>
-            <div style="height:20px;"></div>
+            <div style="height:30px;"></div>
             <div style="float:right; font-size:16px;">
               <b>Hours: </b><%= (restaurant.open_time).to_s + ":00 hrs" %> to <%= (restaurant.close_time).to_s + ":00 hrs" %>
             </div>
-            <div style="height:20px;"></div>
+            <div style="height:30px;"></div>
             <div style="float:right; font-size:16px;">
               <b>About: </b>
               <% if restaurant.description.nil? || restaurant.description.length == 0 %>
                 (No Description given)
               <% else %>
-                <%= restaurant.description %>
+                <%= truncate(restaurant.description.to_s, length: 40, omission: '...') %>
               <% end %>
             </div>
             <div style="height:50px;"></div>
@@ -83,9 +83,15 @@
                               edit_restaurant_path(restaurant), :class => 'btn' %>
                 <% else %>
                   <b><i>This Restaurant is exclusively owned.</i></b>
+                  <div style="height:20px;"></div>
                 <% end %>
+                <span style="padding: 2px;">
+                <%= link_to "Read", restaurant_path(restaurant), :class => 'btn', :style=>"float:right;" %>
+              </span>
               <% else %>
+              <span style="padding: 2px;">
                 <%= link_to "Learn More", restaurant_path(restaurant), :class => 'btn' %>
+              </span>
               <% end %>
           </div>
         </td>
