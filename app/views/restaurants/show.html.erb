@@ -40,7 +40,7 @@
         <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
         <% if !@restaurant.description.nil? &&
               !(@restaurant.description.length == 0) %>
-          <dd><%= @restaurant.description %></dd> <br>
+          <dd><div style="font-size: 16px;"><%= @restaurant.description %></div></dd> <br>
         <% else %><br><dd><i>(No desciption currently available)</i></dd><br>
         <% end %><br>
       </div>
@@ -48,7 +48,7 @@
       <div style="padding-top: 30px;margin-left:60px;">
       <dt><strong><%= model_class.human_attribute_name(:menu) %>:</strong></dt>
       <% if !(@menu.nil?) && !(@menu.length == 0) %>
-        <table class="table table-striped">
+        <br><br><table class="table table-striped">
         <% @menu.each do |item| %>
           <tr><td>
           <dd><%= image_tag ("/assets/small-star.gif"), :style => "height: 20px; width: 20px" %>&nbsp;&nbsp;&nbsp;<i><%= item %></i></dd></td></tr>
