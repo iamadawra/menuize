@@ -83,8 +83,6 @@
                   <%= link_to t('.edit', :default => t("helpers.links.edit")),
                               edit_restaurant_path(restaurant), :class => 'btn' %>
                 </span>
-                <span style="padding: 4px;">
-                <%= link_to "Read", restaurant_path(restaurant), :class => 'btn', :style=>"float:right;" %>
                 <% else %>
                   <b><i>This Restaurant is exclusively owned.</i></b>
                   <div style="height:20px;"></div>
