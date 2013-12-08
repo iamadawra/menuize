@@ -12,9 +12,8 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1.json
   def show
     @restaurant = Restaurant.find(params[:id])
-    @images = Image.find_all_by_restaurant_id(params[:id]) || {}
-    if (@images.length != 0)
-      @image_header = @images[0].file.url(:thumb)
+    if (@restaurant.images.length != 0)
+      @image_header = @restaurant.images[0].file.url(:thumb)
     else
       @image_header = "/assets/missing.png"
     end
@@ -27,14 +26,16 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/new.json
   def new
     @restaurant = Restaurant.new
-    super
+    3.times { @restaurant.menu_items.build }
   end
 
   # GET /restaurants/1/edit
   def edit
     @restaurant = Restaurant.find(params[:id])
     authorize! :edit, @restaurant
-    @images = Image.find_all_by_restaurant_id(params[:id])
+    if (@restaurant.menu_items.nil? || @restaurant.menu_items.length == 0)
+      3.times { @restaurant.menu_items.build }
+    end
   end
 
   # POST /restaurants
@@ -43,6 +44,10 @@ class RestaurantsController < ApplicationController
     if !(params[:restaurant][:file].nil?)
       file = params[:restaurant][:file]
       params[:restaurant].delete(:file)
+    end
+    if !(params[:restaurant][:menu_items_attributes].nil?)
+      menu_params = params[:restaurant][:menu_items_attributes]
+      params[:restaurant].delete(:menu_items_attributes)
     end
     @restaurant = Restaurant.new(params[:restaurant])
     @restaurant.save
@@ -54,6 +59,9 @@ class RestaurantsController < ApplicationController
     end
     if !(file.nil?)
       Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
+    end
+    menu_params.each do |key, value|
+      MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
     end
     super
   end
@@ -67,6 +75,10 @@ class RestaurantsController < ApplicationController
       file = params[:restaurant][:file]
       params[:restaurant].delete(:file)
     end
+    if !(params[:restaurant][:menu_items_attributes].nil?)
+      menu_params = params[:restaurant][:menu_items_attributes]
+      params[:restaurant].delete(:menu_items_attributes)
+    end
     if (params[:restaurant][:status] == "Exclusive" && @restaurant.owned_by != current_user.id)
       request = { :user_id => current_user.id, :granted => 0, :restaurant_id => @restaurant.id, :restaurant_name => @restaurant.name}
       OwnerRequest.create(request)
@@ -76,6 +88,11 @@ class RestaurantsController < ApplicationController
     end
     if !(file.nil?)
       Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
+    end
+    MenuItem.destroy_all(:restaurant_id => params[:id])
+    params[:restaurant].delete(:menu_items_attributes)
+    menu_params.each do |key, value|
+      MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
     end
     super
   end

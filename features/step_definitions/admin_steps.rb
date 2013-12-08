@@ -57,7 +57,7 @@ def create_admin_user_and_logout_if_needed
   end
 end
 
-Given /^an admin user "([^"]*)" exists$/ do |admin_email|
+Given /^an admin user "(.*)" exists$/ do |admin_email|
   user = AdminUser.find_or_create_by_email :email => admin_email,
                                            :password => "password",
                                            :password_confirmation => "password"

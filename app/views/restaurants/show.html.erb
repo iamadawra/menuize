@@ -3,7 +3,7 @@
 <%= link_to "Back to All Restaurants",restaurants_path, :class => 'btn' %>
 <div style="float:right;">
   <% if !(current_user.nil?) %>
-    <%= link_to "Like", vote_restaurant_path(@restaurant, type: "Like"), method: "post", :class => "btn btn-success" %> 
+    <%= link_to "Like", vote_restaurant_path(@restaurant, type: "Like"), method: "post", :class => "btn btn-success" %>
     <%= link_to "Dislike", vote_restaurant_path(@restaurant, type: "Dislike"), method: "post", :class=>"btn btn-danger" %>
     <% if can? :edit, @restaurant %>
       <%= link_to "Edit Restaurant",
@@ -15,12 +15,7 @@
 <div class="line-bottom"></div>
 <div class="page-header" style="font-style: Helvetica;">
   <table class="table table-striped"><tr>
-  <% @image = Image.find_by_restaurant_id(@restaurant.id) %>
-        <% if @image.nil? %>
-          <td><div style="margin-left:20px;"><%= image_tag ("/assets/missing.png"), :style=>"display: inline-block; height: 200px; padding:4px;" %></div></td>
-        <% else %>
-          <td><div style="margin-left:20px;"><%= image_tag @image.file, :style=>"display: inline-block; height: 200px; padding: 4px;" %></div></td>
-        <% end %>
+  <td><div style="margin-left:20px;"><%= image_tag @image_header, :style=>"display: inline-block; height: 200px; padding: 4px;" %></div></td>
   <td><div style="float:right; margin-right:20px;">
   <h1><%= @restaurant.name %></h1>
   </div>
@@ -61,11 +56,11 @@
       <div class="line-bottom"></div>
       <div style="padding-top: 30px;margin-left:60px;">
       <dt><strong><%= model_class.human_attribute_name(:menu) %></strong></dt>
-      <% if !(@menu.nil?) && !(@menu.length == 0) %>
+      <% if !(@restaurant.menu_items.nil?) && !(@restaurant.menu_items.length == 0) %>
         <br><br><table class="table table-striped">
-        <% @menu.each do |item| %>
+        <% @restaurant.menu_items.each do |item| %>
           <tr><td>
-          <dd><%= image_tag ("/assets/small-star.gif"), :style => "height: 20px; width: 20px" %>&nbsp;&nbsp;&nbsp;<i><%= item %></i></dd></td></tr>
+          <dd><%= image_tag ("/assets/small-star.gif"), :style => "height: 20px; width: 20px" %>&nbsp;&nbsp;&nbsp;<i><%= item.content %></i></dd></td></tr>
         <% end %>
         </table>
         <br>
@@ -78,7 +73,7 @@
   <div class="line-bottom"></div>
   <div style="padding-top: 30px; margin-left: 60px;">
     <strong style="padding-left: 8px;">More Images</strong><br><br>
-    <% @images.each do |image| %>
+    <% @restaurant.images.each do |image| %>
       <%= image_tag image.file.url(:medium), :style => "display: inline-block; padding: 8px; white-space: nowrap; float: left;" %>
     <% end %>
   </div>

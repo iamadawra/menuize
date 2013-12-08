@@ -49,9 +49,9 @@
   </div>
   <div class="control-group">
     <%= f.label :menu, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :menu, :class => 'text_field', :style=>"height:250px; width:350px" %>
-    </div>
+    <%= f.fields_for :menu_items do |builder| %>
+      <%= render "item_fields", :f => builder %>
+    <% end %>
   </div>
   <div class="control-group">
     <h2><%= "Upload Photos" %></h2>
@@ -66,7 +66,7 @@
           <%= f.label "Images", :class => 'control-label' %>
         </dt>
         <dd>
-          <% @images.each do |image| %>
+          <% @restaurant.images.each do |image| %>
             <%= image_tag image.file.url(:medium), :style => "display: inline-block; padding: 8px; white-space: nowrap;" %>
             <% if can? :destroy, @restaurant %>
               <%= link_to "(Delete)", "/images/#{image.id}", :method => :delete, :confirm => "Are you sure you would like to delete this?" %>

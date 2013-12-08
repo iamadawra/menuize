@@ -27,6 +27,9 @@ class Restaurant < ActiveRecord::Base
   scope :exclusive, where(:status=>"Exclusive")
   scope :pending_approval, where(:status=>"Pending Approval")
   has_reputation :votes, source: :user, aggregated_by: :sum
+  has_many :menu_items, :dependent => :destroy
+  has_many :images, :dependent => :destroy
+  accepts_nested_attributes_for :menu_items, :reject_if => lambda { |a| a[:content].blank? }
 
   def mark_pending(id)
     self.status = "Pending Approval"

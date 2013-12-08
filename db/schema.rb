@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202010818) do
+ActiveRecord::Schema.define(:version => 20131207092358) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(:version => 20131202010818) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+  end
+
+  create_table "menu_items", :force => true do |t|
+    t.integer  "restaurant_id"
+    t.string   "content"
+    t.integer  "added_by"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "owner_requests", :force => true do |t|
