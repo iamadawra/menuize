@@ -38,6 +38,7 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
+    puts("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + params.to_s)
     if !(params[:restaurant][:file].nil?)
       file = params[:restaurant][:file]
       params[:restaurant].delete(:file)

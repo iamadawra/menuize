@@ -50,8 +50,11 @@
   <div class="control-group">
     <%= f.label :menu, :class => 'control-label' %>
     <%= f.fields_for :menu_items do |builder| %>
-      <%= render "item_fields", :f => builder %>
+      <%= render "menu_item_fields", :f => builder %>
     <% end %>
+    <div style="margin-left:180px;">
+      <%= link_to_add_fields("Add Menu Item", f, :menu_items) %>
+    </div>
   </div>
   <div class="control-group">
     <h2><%= "Upload Photos" %></h2>

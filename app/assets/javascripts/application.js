@@ -32,6 +32,7 @@ $(window).load(function(){
 });
 
 function remove_fields(link) {
+    $(link).parent().next("br").remove();
     $(link).parent().remove();
     eventCancel(event);
 }
@@ -45,4 +46,12 @@ function eventCancel(e) {
    if (e.preventDefault) e.preventDefault();
    if (window.event) e.returnValue = false;
    if (e.cancel != null) e.cancel = true;
+}
+
+function add_fields(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g");
+  content.replace(regexp, new_id);
+  $(link).parent().before(content);
+  eventCancel(event);
 }
