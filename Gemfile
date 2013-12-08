@@ -23,6 +23,7 @@ group :test do
   gem 'cucumber'
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'
+  gem 'selenium-webdriver'
 end
 
 # Gems used only for assets and not required

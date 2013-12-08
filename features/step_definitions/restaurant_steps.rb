@@ -55,3 +55,17 @@ When /^I delete "(.*)"/ do |restaurant|
   click_link "Delete This Restaurant"
 end
 
+Then /there should be "(.*)" menu item boxes/ do |number|
+  x = Integer(number)
+  count = 0
+  all(".item-field").each do |item_field|
+    count+=1
+  end
+  assert count == x
+end
+
+When /I hover over and click on remove link/ do
+  links = all(".remove-link")
+  links[0].click
+end
+

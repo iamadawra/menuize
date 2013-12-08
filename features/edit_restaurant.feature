@@ -45,8 +45,10 @@ Scenario: User claims ownership through edit for collaborative page
 Given the current user is "george@gmail.com" with password "george123"
 And I am on the edit page for "Taco Bell"
 And I select "Exclusive" from "restaurant[status]"
+And I fill in "Mexican pizza" for "restaurant[menu_items_attributes][0][content]"
 And I press "Update Restaurant"
 Then the restaurant "Taco Bell" should be awaiting approval
+And I should see "Mexican pizza"
 
 Scenario: Owner deletes restaurant they own
 Given the current user is "sampeter@yahoo.com" with password "sam123"

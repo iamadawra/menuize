@@ -1,0 +1,22 @@
+def login(username, password)
+  visit "/login"
+  fill_in("email", :with => username)
+  fill_in("password", :with => password)
+  click_button("Log in")
+end
+
+Given /^I visit the admin page for pending approvals/ do
+  visit "/admin/login"
+  fill_in("admin_user[email]", :with => "admin@menuize.com")
+  fill_in("admin_user[password]", :with => "password")
+  click_button("Login")
+  Then "I should see \"Signed in successfully.\""
+end
+
+Given /^"(.*)" with password "(.*)" has requested ownership of "(.*)"/ do |user, password, restaurant|
+  login(user, password)
+  restaurant_id = Restaurant.find_by_name(restaurant).id
+  visit("/restaurants/" + restaurant_id.to_s + "/edit")
+  Given "I select \"Exclusive\" from \"restaurant[status]\""
+  And "I press \"Update Restaurant\""
+end

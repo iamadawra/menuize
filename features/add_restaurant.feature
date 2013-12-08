@@ -18,10 +18,14 @@ When I fill in the following:
      | restaurant[name]           | Pasta Benne		     |
      | restaurant[zip]	          | 94704		     |
      | restaurant[address]	  | 123 abc street, Berkeley |
+     | restaurant[menu_items_attributes][0][content] | Godfather's favorite |
+     | restaurant[menu_items_attributes][1][content] | Chicken Picatta |
 And I press "Create Restaurant"
 Then I should reach the show page for "Pasta Benne"
 And I should see "Entry was successfully created."
 And the restaurant "Pasta Benne" should be editable
+And I should see "Godfather's favorite"
+And I should see "Chicken Picatta"
 
 Scenario: Add a restaurant "Thai Basil" as an owner
 When I fill in the following:
