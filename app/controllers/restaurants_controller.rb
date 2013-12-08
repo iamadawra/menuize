@@ -89,7 +89,11 @@ class RestaurantsController < ApplicationController
       Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
     end
     MenuItem.destroy_all(:restaurant_id => params[:id])
-    params[:restaurant].delete(:menu_items_attributes)
+    menu_params.each do |key, value|
+      if !(value["content"].blank?)
+        MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
+      end
+    end
     super
   end
 
