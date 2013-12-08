@@ -18,7 +18,6 @@ When I fill in the following:
      | restaurant[name]           | Pasta Benne		     |
      | restaurant[zip]	          | 94704		     |
      | restaurant[address]	  | 123 abc street, Berkeley |
-     | restaurant[menu]           | pizza, pasta 	     |
 And I press "Create Restaurant"
 Then I should reach the show page for "Pasta Benne"
 And I should see "Entry was successfully created."
@@ -29,7 +28,6 @@ When I fill in the following:
      | restaurant[name]	          | Thai Basil		     |
      | restaurant[zip]	          | 94704		     |
      | restaurant[address]	  | 567 Durant, Berkeley     |
-     | restaurant[menu]           | Thai combo, Fried rice   |
 And I select "Exclusive" from "restaurant[status]"
 And I press "Create Restaurant"
 Then I should reach the show page for "Thai Basil"
