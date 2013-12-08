@@ -38,7 +38,6 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
-    puts("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + params.to_s)
     if !(params[:restaurant][:file].nil?)
       file = params[:restaurant][:file]
       params[:restaurant].delete(:file)
@@ -58,9 +57,11 @@ class RestaurantsController < ApplicationController
     if !(file.nil?)
       Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
     end
-    menu_params.each do |key, value|
-      if !(value["content"].blank?)
-        MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
+    if !(menu_params.nil?)
+      menu_params.each do |key, value|
+        if !(value["content"].blank?)
+          MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
+        end
       end
     end
     super
@@ -90,9 +91,11 @@ class RestaurantsController < ApplicationController
       Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
     end
     MenuItem.destroy_all(:restaurant_id => params[:id])
-    menu_params.each do |key, value|
-      if !(value["content"].blank?)
-        MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
+    if !(menu_params.nil?)
+      menu_params.each do |key, value|
+        if !(value["content"].blank?)
+          MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
+        end
       end
     end
     super
