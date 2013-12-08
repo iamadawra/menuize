@@ -30,3 +30,19 @@ $(window).load(function(){
     return false;
   });
 });
+
+function remove_fields(link) {
+    $(link).parent().remove();
+    eventCancel(event);
+}
+
+function eventCancel(e) {
+   if (!e)
+     if (window.event) e = window.event;
+     else return;
+   if (e.cancelBubble != null) e.cancelBubble = true;
+   if (e.stopPropagation) e.stopPropagation();
+   if (e.preventDefault) e.preventDefault();
+   if (window.event) e.returnValue = false;
+   if (e.cancel != null) e.cancel = true;
+}

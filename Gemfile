@@ -39,6 +39,7 @@ group :assets do
 end
 
 gem 'jquery-rails', '< 3.0.0'
+gem 'nested_form'
 gem 'bootstrap-sass'
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'

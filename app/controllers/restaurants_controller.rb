@@ -17,9 +17,6 @@ class RestaurantsController < ApplicationController
     else
       @image_header = "/assets/missing.png"
     end
-    menu = @restaurant.menu
-    @menu = menu.split(',').map(&:strip) if !(menu.nil?)
-    super
   end
 
   # GET /restaurants/new
@@ -61,7 +58,9 @@ class RestaurantsController < ApplicationController
       Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
     end
     menu_params.each do |key, value|
-      MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
+      if !(value["content"].blank?)
+        MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
+      end
     end
     super
   end
@@ -91,9 +90,6 @@ class RestaurantsController < ApplicationController
     end
     MenuItem.destroy_all(:restaurant_id => params[:id])
     params[:restaurant].delete(:menu_items_attributes)
-    menu_params.each do |key, value|
-      MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
-    end
     super
   end
 

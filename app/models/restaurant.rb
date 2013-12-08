@@ -29,7 +29,7 @@ class Restaurant < ActiveRecord::Base
   has_reputation :votes, source: :user, aggregated_by: :sum
   has_many :menu_items, :dependent => :destroy
   has_many :images, :dependent => :destroy
-  accepts_nested_attributes_for :menu_items, :reject_if => lambda { |a| a[:content].blank? }
+  accepts_nested_attributes_for :menu_items
 
   def mark_pending(id)
     self.status = "Pending Approval"
