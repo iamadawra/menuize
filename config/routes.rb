@@ -6,7 +6,7 @@ Menuize::Application.routes.draw do
   resources :images
 
 
-  resources :owner_requests
+  resources :owner_requests, :only =>[:new, :show, :create]
 
 
   root :to=>"users#new"
@@ -14,7 +14,9 @@ Menuize::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :sessions, :users, :password_resets
+  resources :sessions, :password_resets
+
+  resources :users, :only => [:new, :create, :show]
 
   resources :restaurants do
     member { post :vote }
