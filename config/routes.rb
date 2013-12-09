@@ -1,13 +1,6 @@
 Menuize::Application.routes.draw do
 
-  resources :menu_items
-
-
-  resources :images
-
-
   resources :owner_requests, :only =>[:new, :show, :create]
-
 
   root :to=>"users#new"
 
