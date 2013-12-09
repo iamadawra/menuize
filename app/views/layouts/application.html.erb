@@ -63,14 +63,14 @@
           <% if current_user %>
             <ul class="nav nav-pills pull-right">
               <li><%= link_to current_user.email %></li>
-              <li><%= link_to "Browse Restaurants", restaurants_path %></li>
+              <li <% if current_page?(restaurants_path) -%> class="active" <% end -%>><%= link_to "Browse Restaurants", restaurants_path %></li>
               <li><%= link_to "Log out", logout_path %></li>
             </ul>
           <% else %>
             <ul class="nav nav-pills pull-right">
-              <li><%= link_to "Browse Restaurants", restaurants_path %></li>
-              <li><%= link_to "Log In", login_path %></li>
-              <li><%= link_to "Sign up", signup_path %></li>
+              <li <% if current_page?(restaurants_path) -%> class="active" <% end -%>><%= link_to "Browse Restaurants", restaurants_path %></li>
+              <li <% if current_page?(login_path) -%> class="active" <% end -%>><%= link_to "Log In", login_path %></li>
+              <li <% if current_page?(signup_path) or current_page?('/') -%> class="active" <% end -%>><%= link_to "Sign up", signup_path %></li>
             </ul>
           <% end %>
         </div>

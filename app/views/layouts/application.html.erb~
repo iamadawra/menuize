@@ -5,8 +5,9 @@
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style type="text/css">
@@ -36,7 +37,7 @@
         font-size: 21px;
         padding: 14px 24px;
       }
-      
+
       .footer {
         position: relative;
         margin-top: -150px;
@@ -57,27 +58,48 @@
 </head>
 <body>
   <div class="container-narrow">
-
       <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Browse Restaurants", restaurants_path %></li>
-          <li><a href="#">Login</a></li>
-        </ul>
+        <div id="user_nav">
+          <% if current_user %>
+            <ul class="nav nav-pills pull-right">
+              <li><%= link_to current_user.email %></li>
+              <li><%= link_to "Browse Restaurants", restaurants_path %></li>
+              <li><%= link_to "Log out", logout_path %></li>
+            </ul>
+          <% else %>
+            <ul class="nav nav-pills pull-right">
+              <li><%= link_to "Browse Restaurants", restaurants_path %></li>
+              <li><%= link_to "Log In", login_path %></li>
+              <li><%= link_to "Sign up", signup_path %></li>
+            </ul>
+          <% end %>
+        </div>
         <h3 class="muted">Menuize</h3>
       </div>
     <div class="row">
-      <span class="span9" style="max-width:70%"><%= yield %></span>
-      <span class="span3" style="max-width:30%">
+      <span class="span9" style="max-width:100%">
+          <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}", :class=>["alert alert-#{name}"] %>
+        <% end %>
+      </span>
+      <span class="span9" style="max-width:100%">
+        <%= yield %>
+      </span>
+      <span class="span3 pull-right" style="margin-left:20px; max-width:100%">
         <h2>About Us</h2>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <p><b><i>Menuize</i></b> is a centralized portal where exhaustive information about restaurants (menus, open hours, prices) is publicly available and editable in a collaborative model. Whether you are a Restaurant Owner, a Contributor or a simply a Reader, Menuize has something in store for you. </p>
+        <p><b><i>For the Restaurant Owners</i></b>, Menuize offers exclusive access to manage content pertaining to the restuarant including all vital information. The incentive? You, as a restuarant owner, can use Menuize as a platform to showcase the best you have to offer!</p>
+        <p><b><i>For the Contributor</i></b>, Menuize is a delight. The whole application hinges around the idea of crowdsourcing information from you, the Contributor. Tell us and the world about your favorite restaurant and make your opinion known!
+        </p>
+        <p><b><i>For the Reader</i></b>, Menuize is a gold mine. From knowing everything about that restaurant down the block to exploring what's the latest hot-spot in town, Menuize gives you, the Reader, a one-stop platform to find out the latest cuisines!
+        </p>
       </span>
     </div>
     <footer class="footer">
       <p>&copy; Menuize 2013</p>
     </footer>
   </div>
-  
+
 </body>
 </html>
 
