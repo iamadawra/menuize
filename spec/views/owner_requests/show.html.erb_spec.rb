@@ -6,7 +6,7 @@ describe "owner_requests/show" do
       :user_id => 1,
       :restaurant_id => 2,
       :restaurant_name => "Restaurant Name",
-      :granted => 3,
+      :granted => -1,
       :granted_by => 4
     ))
   end
@@ -17,7 +17,7 @@ describe "owner_requests/show" do
     rendered.should match(/1/)
     rendered.should match(/2/)
     rendered.should match(/Restaurant Name/)
-    rendered.should match(/3/)
+    rendered.should match(/-1/)
     rendered.should match(/4/)
   end
 end

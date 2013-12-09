@@ -30,14 +30,6 @@ describe OwnerRequestsController do
   # OwnerRequestsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all owner_requests as @owner_requests" do
-      owner_request = OwnerRequest.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:owner_requests).should eq([owner_request])
-    end
-  end
-
   describe "GET show" do
     it "assigns the requested owner_request as @owner_request" do
       owner_request = OwnerRequest.create! valid_attributes
@@ -50,14 +42,6 @@ describe OwnerRequestsController do
     it "assigns a new owner_request as @owner_request" do
       get :new, {}, valid_session
       assigns(:owner_request).should be_a_new(OwnerRequest)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested owner_request as @owner_request" do
-      owner_request = OwnerRequest.create! valid_attributes
-      get :edit, {:id => owner_request.to_param}, valid_session
-      assigns(:owner_request).should eq(owner_request)
     end
   end
 
@@ -97,64 +81,4 @@ describe OwnerRequestsController do
       end
     end
   end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested owner_request" do
-        owner_request = OwnerRequest.create! valid_attributes
-        # Assuming there are no other owner_requests in the database, this
-        # specifies that the OwnerRequest created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        OwnerRequest.any_instance.should_receive(:update_attributes).with({ "user_id" => "1" })
-        put :update, {:id => owner_request.to_param, :owner_request => { "user_id" => "1" }}, valid_session
-      end
-
-      it "assigns the requested owner_request as @owner_request" do
-        owner_request = OwnerRequest.create! valid_attributes
-        put :update, {:id => owner_request.to_param, :owner_request => valid_attributes}, valid_session
-        assigns(:owner_request).should eq(owner_request)
-      end
-
-      it "redirects to the owner_request" do
-        owner_request = OwnerRequest.create! valid_attributes
-        put :update, {:id => owner_request.to_param, :owner_request => valid_attributes}, valid_session
-        response.should redirect_to(owner_request)
-      end
-    end
-
-    describe "with invalid params", :pending=>'true' do
-      it "assigns the owner_request as @owner_request" do
-        owner_request = OwnerRequest.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        OwnerRequest.any_instance.stub(:save).and_return(false)
-        put :update, {:id => owner_request.to_param, :owner_request => { "user_id" => "invalid value" }}, valid_session
-        assigns(:owner_request).should eq(owner_request)
-      end
-
-      it "re-renders the 'edit' template" do
-        owner_request = OwnerRequest.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        OwnerRequest.any_instance.stub(:save).and_return(false)
-        put :update, {:id => owner_request.to_param, :owner_request => { "user_id" => "invalid value" }}, valid_session
-        response.should render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested owner_request" do
-      owner_request = OwnerRequest.create! valid_attributes
-      expect {
-        delete :destroy, {:id => owner_request.to_param}, valid_session
-      }.to change(OwnerRequest, :count).by(-1)
-    end
-
-    it "redirects to the owner_requests list" do
-      owner_request = OwnerRequest.create! valid_attributes
-      delete :destroy, {:id => owner_request.to_param}, valid_session
-      response.should redirect_to(owner_requests_url)
-    end
-  end
-
 end

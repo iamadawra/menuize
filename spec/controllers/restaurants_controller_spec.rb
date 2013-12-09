@@ -28,14 +28,19 @@ describe RestaurantsController do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # RestaurantsController. Be sure to keep this updated too.
-  let(:valid_session) { {:user_id => 1} }
+  let(:valid_session) { {:session_id => "abc"} }
 
   before(:all) do
-    User.create(:email => "abc@gmail.com", :password => "abc123", :id => 1)
+    @user = User.create(:email => "abc@gmail.com", :password => "abc123",
+                        :id => 1)
   end
 
   after(:all) do
     User.find_by_id(1).destroy
+  end
+
+  before(:each) do
+    ApplicationController.any_instance.stub(:current_user).and_return(@user)
   end
 
   describe "GET index" do
@@ -58,14 +63,6 @@ describe RestaurantsController do
     it "assigns a new restaurant as @restaurant" do
       get :new, {}, valid_session
       assigns(:restaurant).should be_a_new(Restaurant)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested restaurant as @restaurant" do
-      restaurant = Restaurant.create! valid_attributes
-      get :edit, {:id => restaurant.to_param}, valid_session
-      assigns(:restaurant).should eq(restaurant)
     end
   end
 
@@ -151,14 +148,6 @@ describe RestaurantsController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested restaurant" do
-      valid_attributes["status"] = "Exclusive"
-      valid_attributes["owned_by"] = 1
-      restaurant = Restaurant.create! valid_attributes
-      expect {
-        delete :destroy, {:id => restaurant.to_param}, valid_session
-      }.to change(Restaurant, :count).by(-1)
-    end
 
     it "redirects to the restaurants list" do
       restaurant = Restaurant.create! valid_attributes
