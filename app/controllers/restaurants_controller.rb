@@ -38,6 +38,7 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
+    return if check_if_exists(params[:restaurant][:name])
     set_params
     @restaurant = Restaurant.new(params[:restaurant])
     @restaurant.save
@@ -137,5 +138,14 @@ class RestaurantsController < ApplicationController
       end
     end
     redirect_to(request.env["HTTP_REFERER"])
+  end
+
+  private
+  def check_if_exists(name)
+    if !(Restaurant.find_by_name(name).nil? &&
+         Restaurant.find_by_name(name.capitalize).nil?)
+      flash[:notice] = "A restaurant with this name already exists."
+      redirect_to(new_restaurant_path) and return true
+    end
   end
 end
