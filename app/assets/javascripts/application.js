@@ -19,14 +19,10 @@
 //= require on_the_spot
 
 $(window).load(function(){
-// alert('test1');
-  // $("#restaurants th a, #restaurants .pagination a").live("click", function() {
-    // alert('test2');
-    // $.getScript(this.href);
-    // return false;
-  // });
   $("input").keyup(function() {
-    $.get($("#restaurants_search").attr("action"), $("#restaurants_search").serialize(), null, "script");
+    setTimeout(function(){
+      $.get($("#restaurants_search").attr("action"), $("#restaurants_search").serialize(), null, "script");
+    },0);
     return false;
   });
 });

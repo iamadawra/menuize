@@ -15,6 +15,7 @@ Background: There are several restaurants in the database.
 
 Given I am on the restaurant page
 
+@javascript
 Scenario: Search restaurants by location (ZIP)
 When I fill in the following:
      | search       |       |
@@ -26,6 +27,7 @@ And I should see "Racha"
 And I should see "Taco Bell"
 And I should see "Pasta Benne"
 
+@javascript
 Scenario: Search Restaurants by Name
 When I fill in the following:
      | search        | Taco  |
@@ -37,6 +39,7 @@ And I should not see "Racha"
 And I should see "Taco Bell"
 And I should not see "Pasta Benne"
 
+@javascript
 Scenario: No relevant results found (a.k.a. Sad Path)
 When I fill in the following:
      | search      |   T    |
