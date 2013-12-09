@@ -16,6 +16,7 @@ Scenario: Remember me box is checked
 Given the user is "johnsnow@gmail.com" remembered with password "john123"
 When I reopen the browser
 And I visit the login page
+And I wait for 500 milliseconds
 Then I should see "johnsnow@gmail.com"
 
 @javascript
