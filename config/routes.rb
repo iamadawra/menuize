@@ -11,6 +11,8 @@ Menuize::Application.routes.draw do
 
   resources :users, :only => [:new, :create, :show]
 
+  resources :images, :only => [:destroy]
+
   resources :restaurants do
     member { post :vote }
     collection do
