@@ -9,6 +9,7 @@ Given /^the current user is "(.*)" with password "(.*)"/ do |user, pass|
   fill_in("email", :with => user)
   fill_in("password", :with => pass)
   click_button("Log in")
+  visit restaurants_path
 end
 
 Given /^the user is "(.*)" remembered with password "(.*)"/ do |user, pass|
@@ -17,6 +18,7 @@ Given /^the user is "(.*)" remembered with password "(.*)"/ do |user, pass|
   fill_in("password", :with => pass)
   check("remember_me")
   click_button("Log in")
+  visit restaurants_path
 end
 
 Given /^I sign up as "(.*)" with password "(.*)"/ do |username, password|
