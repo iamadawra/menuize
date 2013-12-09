@@ -55,7 +55,8 @@ class Restaurant < ActiveRecord::Base
     end
 
     if !zip.nil? and zip.length!=0   # length==5?
-      result = result.where(zip: zip.to_i)
+      # result = result.where(zip: zip.to_i)
+      result = result.where('zip LIKE ?', "%#{zip}%")
     end
     return result
   end
