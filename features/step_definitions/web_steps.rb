@@ -28,6 +28,22 @@ module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield
   end
+  def should_or_not_see(regexp, value)
+    regexp = Regexp.new(regexp)
+    if page.respond_to? :should
+      if (value)
+        page.should have_xpath('//*', :text => regexp)
+      else
+        page.should have_no_xpath('//*', :text => regexp)
+      end
+    else
+      if (value)
+        assert page.has_xpath?('//*', :text => regexp)
+      else
+        assert page.has_no_xpath?('//*', :text => regexp)
+      end
+    end
+  end
 end
 World(WithinHelpers)
 
@@ -115,13 +131,7 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
-  regexp = Regexp.new(regexp)
-
-  if page.respond_to? :should
-    page.should have_xpath('//*', :text => regexp)
-  else
-    assert page.has_xpath?('//*', :text => regexp)
-  end
+  should_or_not_see(regexp, true)
 end
 
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
@@ -133,37 +143,7 @@ Then /^(?:|I )should not see "([^"]*)"$/ do |text|
 end
 
 Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
-  regexp = Regexp.new(regexp)
-
-  if page.respond_to? :should
-    page.should have_no_xpath('//*', :text => regexp)
-  else
-    assert page.has_no_xpath?('//*', :text => regexp)
-  end
-end
-
-Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field, parent, value|
-  with_scope(parent) do
-    field = find_field(field)
-    field_value = (field.tag_name == 'textarea') ? field.text : field.value
-    if field_value.respond_to? :should
-      field_value.should =~ /#{value}/
-    else
-      assert_match(/#{value}/, field_value)
-    end
-  end
-end
-
-Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |field, parent, value|
-  with_scope(parent) do
-    field = find_field(field)
-    field_value = (field.tag_name == 'textarea') ? field.text : field.value
-    if field_value.respond_to? :should_not
-      field_value.should_not =~ /#{value}/
-    else
-      assert_no_match(/#{value}/, field_value)
-    end
-  end
+  should_or_not_see(regexp, false)
 end
 
 Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_message|

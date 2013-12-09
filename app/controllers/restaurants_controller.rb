@@ -13,7 +13,7 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
     if (@restaurant.images.length != 0)
-      @image_header = @restaurant.images[0].file.url(:thumb)
+      @image_header = @restaurant.images[0].file.url(:medium)
     else
       @image_header = "/assets/missing.png"
     end
@@ -38,66 +38,31 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
-    if !(params[:restaurant][:file].nil?)
-      file = params[:restaurant][:file]
-      params[:restaurant].delete(:file)
-    end
-    if !(params[:restaurant][:menu_items_attributes].nil?)
-      menu_params = params[:restaurant][:menu_items_attributes]
-      params[:restaurant].delete(:menu_items_attributes)
-    end
+    set_params
     @restaurant = Restaurant.new(params[:restaurant])
     @restaurant.save
     if (params[:restaurant][:status] == "Exclusive")
-      request = { :user_id => current_user.id, :granted => 0, :restaurant_id => @restaurant.id, :restaurant_name => @restaurant.name}
-      OwnerRequest.create(request)
-      UserMailer.access_request(current_user, @restaurant).deliver
+      send_request
       @restaurant.mark_pending(current_user.id)
     end
-    if !(file.nil?)
-      Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
-    end
-    if !(menu_params.nil?)
-      menu_params.each do |key, value|
-        if !(value["content"].blank?)
-          MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
-        end
-      end
-    end
+    set_menu_items_and_file
     super
   end
 
   # PUT /restaurants/1
   # PUT /restaurants/1.json
   def update
+    set_params
     @restaurant = Restaurant.find(params[:id])
     authorize! :update, @restaurant
-    if !(params[:restaurant][:file].nil?)
-      file = params[:restaurant][:file]
-      params[:restaurant].delete(:file)
-    end
-    if !(params[:restaurant][:menu_items_attributes].nil?)
-      menu_params = params[:restaurant][:menu_items_attributes]
-      params[:restaurant].delete(:menu_items_attributes)
-    end
-    if (params[:restaurant][:status] == "Exclusive" && @restaurant.owned_by != current_user.id)
-      request = { :user_id => current_user.id, :granted => 0, :restaurant_id => @restaurant.id, :restaurant_name => @restaurant.name}
-      OwnerRequest.create(request)
+    if (params[:restaurant][:status] == "Exclusive" &&
+        @restaurant.owned_by != current_user.id)
       params[:restaurant][:status] = "Pending Approval"
-      UserMailer.access_request(current_user, @restaurant).deliver
+      send_request
       @restaurant.mark_pending(current_user.id)
     end
-    if !(file.nil?)
-      Image.create({ :restaurant_id => @restaurant.id, :file => file, :user_id => current_user.id})
-    end
     MenuItem.destroy_all(:restaurant_id => params[:id])
-    if !(menu_params.nil?)
-      menu_params.each do |key, value|
-        if !(value["content"].blank?)
-          MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
-        end
-      end
-    end
+    set_menu_items_and_file
     super
   end
 
@@ -112,22 +77,12 @@ class RestaurantsController < ApplicationController
 
   # PUT /restaurants/1/approve
   def approve
-    @restaurant = Restaurant.find(params[:id])
-    if @restaurant
-      @req = (OwnerRequest.find_by_restaurant_id(@restaurant.id))
-      @req.approve
-      redirect_to(request.env["HTTP_REFERER"])
-    end
+    approve_or_deny(true)
   end
 
   # PUT /restaurants/1/deny
   def deny
-    @restaurant = Restaurant.find(params[:id])
-    if @restaurant
-      @req = (OwnerRequest.find_by_restaurant_id(@restaurant.id))
-      @req.deny
-      redirect_to(request.env["HTTP_REFERER"])
-    end
+    approve_or_deny(false)
   end
 
   def vote
@@ -135,5 +90,52 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
     @restaurant.add_or_update_evaluation(:votes, value, current_user)
     redirect_to :back, notice: "Thank You! Your vote has been registered."
+  end
+
+  private
+  def set_params
+    if !(params[:restaurant][:file].nil?)
+      @file = params[:restaurant][:file]
+      params[:restaurant].delete(:file)
+    end
+    if !(params[:restaurant][:menu_items_attributes].nil?)
+      @menu_params = params[:restaurant][:menu_items_attributes]
+      params[:restaurant].delete(:menu_items_attributes)
+    end
+  end
+
+  private
+  def set_menu_items_and_file
+    if !(@file.nil?)
+      Image.create({ :restaurant_id => @restaurant.id, :file => @file, :user_id => current_user.id})
+    end
+    if !(@menu_params.nil?)
+      @menu_params.each do |key, value|
+        if !(value["content"].blank?)
+          MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
+        end
+      end
+    end
+  end
+
+  private
+  def send_request
+    request = { :user_id => current_user.id, :granted => 0, :restaurant_id => @restaurant.id, :restaurant_name => @restaurant.name}
+    OwnerRequest.create(request)
+    UserMailer.access_request(current_user, @restaurant).deliver
+  end
+
+  private
+  def approve_or_deny(approve)
+    @restaurant = Restaurant.find(params[:id])
+    if @restaurant
+      @req = (OwnerRequest.find_by_restaurant_id(@restaurant.id))
+      if (approve)
+        @req.approve
+      else
+        @req.deny
+      end
+    end
+    redirect_to(request.env["HTTP_REFERER"])
   end
 end
