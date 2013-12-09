@@ -24,6 +24,7 @@ group :test do
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'
   gem 'selenium-webdriver'
+  gem 'show_me_the_cookies'
 end
 
 # Gems used only for assets and not required
