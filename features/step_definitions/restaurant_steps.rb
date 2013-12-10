@@ -69,3 +69,26 @@ When /I hover over and click on remove link/ do
   links[0].click
 end
 
+Then /^"(.*)" should appear before "(.*)"/ do |first, second|
+  has_first = false
+  has_second = false
+  passes = false
+  all("tr").each do |tr|
+    has_first = true if tr.has_content?(first)
+    if tr.has_content?(second)
+      has_second = true
+      if (has_first)
+        passes = true
+      else
+        passes = false
+      end
+      break
+    end
+  end
+  assert passes
+end
+
+When /^I reach the restaurant page/ do
+  visit '/restaurants'
+end
+
