@@ -14,7 +14,7 @@
       <img src="./assets/0.7.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2013-12-09T21:20:02-08:00">2013-12-09T21:20:02-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2013-12-09T21:39:00-08:00">2013-12-09T21:39:00-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         6.33
+         6.29
        </span>
     </span> hits/line)
   </h2>
@@ -87,7 +87,7 @@
         <td>46</td>
         <td>43</td>
         <td>3</td>
-        <td>19.5</td>
+        <td>18.5</td>
       </tr>
       
       <tr>
@@ -333,7 +333,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         5.76
+         5.64
        </span>
     </span> hits/line)
   </h2>
@@ -365,7 +365,7 @@
         <td>46</td>
         <td>43</td>
         <td>3</td>
-        <td>19.5</td>
+        <td>18.5</td>
       </tr>
       
       <tr>
@@ -1911,8 +1911,8 @@
           <code class="ruby">  def current_user</code>
         </li>
       
-        <li class="covered" data-hits="730" data-linenumber="70">
-          <span class="hits">730</span>
+        <li class="covered" data-hits="682" data-linenumber="70">
+          <span class="hits">682</span>
           
           <code class="ruby">    @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]</code>
         </li>
@@ -5412,7 +5412,7 @@
         <li class="covered" data-hits="24" data-linenumber="54">
           <span class="hits">24</span>
           
-          <code class="ruby">      result = result.where('name LIKE ?', &quot;%#{name}%&quot;)</code>
+          <code class="ruby">      result = result.where('name ILIKE ?', &quot;%#{name}%&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="55">
@@ -5442,7 +5442,7 @@
         <li class="covered" data-hits="15" data-linenumber="59">
           <span class="hits">15</span>
           
-          <code class="ruby">      result = result.where('zip LIKE ?', &quot;%#{zip}%&quot;)</code>
+          <code class="ruby">      result = result.where('zip ILIKE ?', &quot;%#{zip}%&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="60">
