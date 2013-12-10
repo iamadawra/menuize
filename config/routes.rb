@@ -2,14 +2,8 @@ Menuize::Application.routes.draw do
 
   resources :owner_requests, :only =>[:new, :show, :create]
 
-  constraints lambda { |req| !req.session[:user_id].blank? } do
-    root :to => "restaurants#index"
-  end
-
-  unauthenticated :user do
-    root to: "users#new"
-  end
-
+  root :to => "restaurants#index"
+  
   resources :users, :only => [:new, :create]
 
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -56,6 +56,8 @@ gem 'aws-sdk'
 gem 'best_in_place'
 gem 'on_the_spot'
 gem 'activerecord-reputation-system', require: 'reputation_system'
+gem 'in_place_editing'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
