@@ -93,14 +93,8 @@ class RestaurantsController < ApplicationController
 
   private
   def set_params
-    if !(params[:restaurant][:file].nil?)
-      @file = params[:restaurant][:file]
-      params[:restaurant].delete(:file)
-    end
-    if !(params[:restaurant][:menu_items_attributes].nil?)
-      @menu_params = params[:restaurant][:menu_items_attributes]
-      params[:restaurant].delete(:menu_items_attributes)
-    end
+    param_to_instance_var(:file)
+    param_to_instance_var(:menu_items_attributes)
   end
 
   private
@@ -108,12 +102,20 @@ class RestaurantsController < ApplicationController
     if !(@file.nil?)
       Image.create({ :restaurant_id => @restaurant.id, :file => @file, :user_id => current_user.id})
     end
-    if !(@menu_params.nil?)
-      @menu_params.each do |key, value|
+    if !(@menu_items_attributes.nil?)
+      @menu_items_attributes.each do |key, value|
         if !(value["content"].blank?)
           MenuItem.create({ :restaurant_id => @restaurant.id, :added_by => current_user.id, :content => value["content"]})
         end
       end
+    end
+  end
+
+  private
+  def param_to_instance_var(symbol)
+    if !(params[:restaurant][symbol].nil?)
+      eval %Q{ @#{symbol.to_s} = params[:restaurant][symbol] }
+      params[:restaurant].delete(symbol)
     end
   end
 
