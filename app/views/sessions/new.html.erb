@@ -2,19 +2,22 @@
 
 <%= form_tag sessions_path do %>
   <p>
-    <%= label_tag :email %><br />
-    <%= text_field_tag :email, params[:email] %>
+    <span style="font-size: 16px; display:inline;"><%= label_tag :email %></span>
+    <span style="display:inline;"><%= text_field_tag :email, params[:email], :style=>"height:25px; width:220px" %></span>
   </p>
   <p>
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
+    <span style="font-size: 16px; display: inline;"><%= label_tag :password %></span>
+    <span style="display:inline;"><%= password_field_tag :password, '', :style=>"height:25px; width:220px"  %></span>
   </p>
 
   <span><%= submit_tag "Log in", :class=>"btn btn-success" %></span>
   <span><%= link_to "Signup", signup_path, :class=>"btn btn-primary" %></span>
-  <p><%= link_to "Forgotten Your Password?", new_password_reset_path %></p>
-  <div class="field">
-  <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-  <%= label_tag :remember_me %>
+  <div style="height:30px;"></div>
+  <div>
+  <span style="font-size:16px;"><%= link_to "Forgot My Password!", new_password_reset_path %></span>
+  <span class="field" style="padding-left:20px;">
+  <%= check_box_tag :remember_me, 1, params[:remember_me],:style=>"font-size:16px; display:inline; padding-top:0px;" %>
+  <%= label_tag :remember_me,'Remember Me', :style=>"font-size:16px; display:inline; padding-top:10px;" %>
+</span>
 </div>
 <% end %>

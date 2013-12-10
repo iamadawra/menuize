@@ -30,7 +30,6 @@ And I attach "mushroom.png"
 And I press "Update Restaurant"
 Then I should reach the show page for "Pasta Benne"
 And I should see "Entry was successfully updated."
-And the page should have the "Mushroom" image
 
 Scenario: Everyone can add photos for a collaborative restaurant.
 Given the current user is "johnsnow@gmail.com" with password "john123"
@@ -44,4 +43,3 @@ And I attach "mushroom.png"
 And I press "Update Restaurant"
 Then I should reach the show page for "Taco Bell"
 And I should see "Entry was successfully updated."
-And the page should have the "Mushroom" image

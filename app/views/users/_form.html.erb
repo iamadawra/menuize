@@ -1,22 +1,17 @@
 <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :password, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.password_field :password, :class => 'text_field' %>
-    </div>
+    <span style="display:inline;"><%= f.label :email, :class => 'control-label' %></span>
+    <span style="display:inline;"><%= f.text_field :email, :style=>"height:30px; width:220px;" %></span>
   </div>
 
   <div class="control-group">
-    <%= f.label :password_confirmation, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.password_field :password_confirmation, :class => 'text_field' %>
-    </div>
+    <span style="display:inline;"><%= f.label :password, :class => 'control-label' %></span>
+    <span style="display:inline;"><%= f.password_field :password, :style=>"height:25px; width:220px;" %></span>
+  </div>
+
+  <div class="control-group">
+    <span style="display:inline;"><%= f.label :password_confirmation, :class => 'control-label' %></span>
+    <span><%= f.password_field :password_confirmation,  :style=>"height:25px; width:220px;" %></span>
   </div>
 
   <div class="form-actions">

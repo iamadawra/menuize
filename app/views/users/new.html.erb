@@ -2,16 +2,16 @@
 
 <%= form_for @user do |f| %>
   <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+    <span style="display:inline; font-size: 16px;"><%= f.label :email %></span>
+    <span style="display:inline;"><%= f.text_field :email, :style=>"height:25px; width:220px;" %></span>
   </p>
   <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
+    <span style="display:inline;font-size: 16px;"><%= f.label :password %></span>
+    <span style="display:inline;"><%= f.password_field :password, :style=>"height:25px; width:220px;" %></span>
   </p>
   <p>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
+    <span style="display:inline;font-size: 16px;"><%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, :style=>"height:25px; width:220px;" %></span>
   </p>
   <p><%= f.submit "Signup", :class=>"btn btn-primary" %></p>
 <% end %>
